@@ -1,5 +1,5 @@
 {
-  "name": "demo1",
+  "name": "pos-system-app-web",
   "version": "8.1.9",
   "scripts": {
     "ng": "ng",
