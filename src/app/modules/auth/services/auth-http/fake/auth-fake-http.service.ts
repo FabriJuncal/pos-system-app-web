@@ -40,7 +40,7 @@ export class AuthHTTPService {
         }
 
         const auth = new AuthModel();
-        auth.authToken = user.authToken;
+        auth.token = user.token;
         auth.refreshToken = user.refreshToken;
         auth.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
         return auth;
@@ -50,7 +50,7 @@ export class AuthHTTPService {
 
   createUser(user: UserModel): Observable<any> {
     user.roles = [2]; // Manager
-    user.authToken = 'auth-token-' + Math.random();
+    user.token = 'auth-token-' + Math.random();
     user.refreshToken = 'auth-token-' + Math.random();
     user.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
     user.pic = './assets/media/avatars/300-1.jpg';
@@ -71,7 +71,7 @@ export class AuthHTTPService {
 
   getUserByToken(token: string): Observable<UserModel | undefined> {
     const user = UsersTable.users.find((u: UserModel) => {
-      return u.authToken === token;
+      return u.token === token;
     });
 
     if (!user) {

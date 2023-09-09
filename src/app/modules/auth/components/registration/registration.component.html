@@ -61,26 +61,26 @@
 
   <!--begin::Form group-->
   <div class="fv-row mb-8">
-    <label class="form-label fw-bolder text-dark fs-6">Nombre y Apellido</label>
-    <input class="form-control bg-transparent" type="text" name="fullname" formControlName="fullname"
-      placeholder="Nombre y apellido" autocomplete="off" [ngClass]="{
-        'is-invalid': registrationForm.controls['fullname'].invalid,
-        'is-valid': registrationForm.controls['fullname'].valid
+    <label class="form-label fw-bolder text-dark fs-6">Nombre</label>
+    <input class="form-control bg-transparent" type="text" name="name" formControlName="name"
+      placeholder="Nombre" autocomplete="off" [ngClass]="{
+        'is-invalid': registrationForm.controls['name'].invalid,
+        'is-valid': registrationForm.controls['name'].valid
       }" />
     <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
         validation: 'required',
-        message: 'El nombre y apellido es requerido',
-        control: registrationForm.controls['fullname']
+        message: 'El nombre es requerido',
+        control: registrationForm.controls['name']
       }"></ng-container>
     <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
         validation: 'minlength',
-        message: 'El nombre y apellido debe tener al menos 3 símbolos',
-        control: registrationForm.controls['fullname']
+        message: 'El nombre debe tener al menos 3 símbolos',
+        control: registrationForm.controls['name']
       }"></ng-container>
     <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
         validation: 'maxLength',
-        message: 'El nombre y apellido debe tener un máximo de 100 carácteres',
-        control: registrationForm.controls['fullname']
+        message: 'El nombre debe tener un máximo de 100 carácteres',
+        control: registrationForm.controls['name']
       }"></ng-container>
   </div>
   <!--end::Form group-->
