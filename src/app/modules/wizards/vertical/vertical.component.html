@@ -25,11 +25,11 @@
             <!--begin::Label-->
             <div class="stepper-label">
               <h3 class="stepper-title">
-                Account Type
+                Bienvenida
               </h3>
 
               <div class="stepper-desc fw-semibold">
-                Setup Your Account Details
+                Empieza a configurar tu Punto de Venta
               </div>
             </div>
             <!--end::Label-->
@@ -40,6 +40,27 @@
           <div class="stepper-line h-40px"></div>
           <!--end::Line-->
         </div>
+
+        <!-- <div class="stepper-item" [ngClass]="{
+            current: currentStep$.value === 2,
+            completed: currentStep$.value > 2
+          }">
+          <div class="stepper-wrapper">
+            <div class="stepper-icon w-40px h-40px">
+              <i class="stepper-check fas fa-check"></i>
+              <span class="stepper-number">2</span>
+            </div>
+            <div class="stepper-label">
+              <h3 class="stepper-title">
+                Tipo de Cuenta
+              </h3>
+              <div class="stepper-desc fw-semibold">
+                Configure los detalles de su cuenta
+              </div>
+            </div>
+          </div>
+          <div class="stepper-line h-40px"></div>
+        </div> -->
 
         <div class="stepper-item" [ngClass]="{
             current: currentStep$.value === 2,
@@ -57,10 +78,10 @@
             <!--begin::Label-->
             <div class="stepper-label">
               <h3 class="stepper-title">
-                Account Settings
+                Información del Negocio
               </h3>
               <div class="stepper-desc fw-semibold">
-                Setup Your Account Settings
+                Ingresa la información básica de tu negocio.
               </div>
             </div>
             <!--end::Label-->
@@ -88,41 +109,10 @@
             <!--begin::Label-->
             <div class="stepper-label">
               <h3 class="stepper-title">
-                Business Info
+                Marca del negocio
               </h3>
               <div class="stepper-desc fw-semibold">
-                Your Business Related Info
-              </div>
-            </div>
-            <!--end::Label-->
-          </div>
-          <!--end::Wrapper-->
-
-          <!--begin::Line-->
-          <div class="stepper-line h-40px"></div>
-          <!--end::Line-->
-        </div>
-
-        <div class="stepper-item" [ngClass]="{
-            current: currentStep$.value === 4,
-            completed: currentStep$.value > 4
-          }">
-          <!--begin::Wrapper-->
-          <div class="stepper-wrapper">
-            <!--begin::Icon-->
-            <div class="stepper-icon w-40px h-40px">
-              <i class="stepper-check fas fa-check"></i>
-              <span class="stepper-number">4</span>
-            </div>
-            <!--end::Icon-->
-
-            <!--begin::Label-->
-            <div class="stepper-label">
-              <h3 class="stepper-title">
-                Billing Details
-              </h3>
-              <div class="stepper-desc fw-semibold">
-                Set Your Payment Methods
+                Personaliza la apariencia de tu negocio en la aplicación POS mediante la configuración de la marca.
               </div>
             </div>
             <!--end::Label-->
@@ -167,23 +157,16 @@
     <form class="py-20 w-100 w-xl-700px px-9" noValidate id="kt_create_account_form">
       <div class="current">
         <ng-container *ngIf="currentStep$.value === 1">
-          <app-step1 class="w-100" [updateParentModel]="updateAccount" [defaultValues]="account$.value"></app-step1>
+          <app-welcome class="w-100" [updateParentModel]="updateAccount" [defaultValues]="account$.value"></app-welcome>
         </ng-container>
-
+        <!-- <ng-container *ngIf="currentStep$.value === 2">
+          <app-account-type class="w-100" [updateParentModel]="updateAccount" [defaultValues]="account$.value"></app-account-type>
+        </ng-container> -->
         <ng-container *ngIf="currentStep$.value === 2">
-          <app-step2 class="w-100" [updateParentModel]="updateAccount" [defaultValues]="account$.value"></app-step2>
+          <app-business-details class="w-100" [updateParentModel]="updateAccount" [defaultValues]="account$.value"></app-business-details>
         </ng-container>
-
         <ng-container *ngIf="currentStep$.value === 3">
-          <app-step3 class="w-100" [updateParentModel]="updateAccount" [defaultValues]="account$.value"></app-step3>
-        </ng-container>
-
-        <ng-container *ngIf="currentStep$.value === 4">
-          <app-step4 class="w-100" [updateParentModel]="updateAccount" [defaultValues]="account$.value"></app-step4>
-        </ng-container>
-
-        <ng-container *ngIf="currentStep$.value === 5">
-          <app-step5 class="w-100"></app-step5>
+          <app-business-branding class="w-100" [updateParentModel]="updateAccount" [defaultValues]="account$.value"></app-business-branding>
         </ng-container>
       </div>
 
@@ -192,7 +175,7 @@
           <ng-container *ngIf="currentStep$.value !== 1">
             <button type="button" class="btn btn-lg btn-light-primary me-3" (click)="prevStep()">
               <app-keenicon name="arrow-left" class="fs-3 ms-1"></app-keenicon>
-              Back
+              Volver
             </button>
           </ng-container>
         </div>
@@ -203,11 +186,11 @@
               (click)="nextStep()">
               <span class="indicator-label">
                 <ng-container *ngIf="currentStep$.value < formsCount - 1">
-                  Continue {{ " " }}
+                  Continuar {{ " " }}
                   <app-keenicon name="arrow-right" class="fs-3 ms-2 me-0"></app-keenicon>
                 </ng-container>
                 <ng-container *ngIf="currentStep$.value === formsCount - 1">
-                  Submit
+                  Enviar
                 </ng-container>
               </span>
             </button>

@@ -74,7 +74,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       .login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe((user: UserModel | undefined) => {
+        console.log('user->', user);
         if (user) {
+          this.returnUrl = user.initiated ? 'dashboard' : '/crafted/pages/wizards/vertical';
           this.router.navigate([this.returnUrl]);
         } else {
           this.hasError = true;

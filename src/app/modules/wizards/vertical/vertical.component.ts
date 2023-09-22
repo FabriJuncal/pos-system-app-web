@@ -25,6 +25,7 @@ export class VerticalComponent implements OnInit, OnDestroy {
     const updatedAccount = { ...currentAccount, ...part };
     this.account$.next(updatedAccount);
     this.isCurrentFormValid$.next(isFormValid);
+    console.log('currentAccount->',currentAccount);
   };
 
   nextStep() {

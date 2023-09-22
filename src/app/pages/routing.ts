@@ -27,7 +27,7 @@ const Routing: Routes = [
     path: 'crafted/pages/wizards',
     loadChildren: () =>
       import('../modules/wizards/wizards.module').then((m) => m.WizardsModule),
-    data: { layout: 'light-header' },
+      data: { layout: 'light-header' },
   },
   {
     path: 'crafted/widgets',

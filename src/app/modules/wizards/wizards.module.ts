@@ -12,6 +12,10 @@ import { Step3Component } from './steps/step3/step3.component';
 import { Step4Component } from './steps/step4/step4.component';
 import { Step5Component } from './steps/step5/step5.component';
 import { SharedModule } from "../../_metronic/shared/shared.module";
+import { WelcomeComponent } from './steps/welcome/welcome.component';
+import { AccountTypeComponent } from './steps/account-type/account-type.component';
+import { BusinessDetailsComponent } from './steps/business-details/business-details.component';
+import { BusinessBrandingComponent } from './steps/business-branding/business-branding.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { SharedModule } from "../../_metronic/shared/shared.module";
     Step3Component,
     Step4Component,
     Step5Component,
+    WelcomeComponent,
+    AccountTypeComponent,
+    BusinessDetailsComponent,
+    BusinessBrandingComponent
   ],
   imports: [
     CommonModule,
