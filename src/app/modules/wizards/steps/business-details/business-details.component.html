@@ -24,27 +24,6 @@
     </div>
   </div>
   <div class="fv-row mb-10">
-    <label class="d-flex align-items-center form-label"
-      ><span class="required">Nombre corto de su negocio</span></label
-    ><input
-      name="businessDescriptor"
-      class="form-control form-control-lg form-control-solid"
-      formControlName="businessDescriptor"
-    />
-    <div
-      class="fv-plugins-message-container invalid-feedback"
-      *ngIf="
-        form.get('businessDescriptor')?.hasError('required') &&
-        form.get('businessDescriptor')?.touched
-      "
-    >
-    El nombre corto de su negocio es requerido
-    </div>
-    <div class="form-text">
-      Los clientes verán el nombre corto de su negocio en su estado de cuenta.
-    </div>
-  </div>
-  <div class="fv-row mb-10">
     <label class="form-label required">Tipo de negocio</label
     ><select
       name="businessType"

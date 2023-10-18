@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ICreateAccount } from '../../create-account.helper';
+import { UploadSingleImage } from '../../../../components/upload-single-image/upload-single-image';
+import { UploadMultiImage } from '../../../../components/upload-multi-image/upload-multi-image';
 
 @Component({
   selector: 'app-business-branding',
@@ -12,8 +14,10 @@ export class BusinessBrandingComponent implements OnInit, OnDestroy {
     part: Partial<ICreateAccount>,
     isFormValid: boolean
   ) => void;
-  form: FormGroup;
   @Input() defaultValues: Partial<ICreateAccount>;
+  form: FormGroup;
+  uploadSingleImageOption: UploadSingleImage;
+  uploadMultiImageOption: UploadMultiImage;
   private unsubscribe: Subscription[] = [];
 
   constructor(private fb: FormBuilder) {}
@@ -21,17 +25,40 @@ export class BusinessBrandingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initForm();
     this.updateParentModel({}, true);
+    this.initComponents();
   }
 
   initForm() {
     this.form = this.fb.group({
-      accountType: [this.defaultValues.accountType, [Validators.required]],
+      businessDescriptor: [this.defaultValues.businessDescriptor, [Validators.required]],
+      // businessDescriptor: [this.defaultValues.businessDescriptor, [Validators.required]],
+      // businessDescriptor: [this.defaultValues.businessDescriptor, [Validators.required]],
+      // businessDescriptor: [this.defaultValues.businessDescriptor, [Validators.required]],
+      // businessDescriptor: [this.defaultValues.businessDescriptor, [Validators.required]],
+      // businessDescriptor: [this.defaultValues.businessDescriptor, [Validators.required]],
+      // businessDescriptor: [this.defaultValues.businessDescriptor, [Validators.required]]
     });
 
     const formChangesSubscr = this.form.valueChanges.subscribe((val) => {
       this.updateParentModel(val, true);
     });
     this.unsubscribe.push(formChangesSubscr);
+  }
+
+  initUploadSingleImageComponent(){
+
+  }
+
+  initComponents(){
+    this.uploadSingleImageOption = {
+      title: '',
+      description: 'Los clientes verán el logo de la marca en su estado de cuenta. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg'
+    };
+
+    this.uploadMultiImageOption = {
+      text: 'Suelte los archivos aquí o haga clic para cargarlos.',
+      cantFile: 3
+    }
   }
 
   ngOnDestroy() {

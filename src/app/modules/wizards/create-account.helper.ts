@@ -1,7 +1,5 @@
 interface ICreateAccount {
   accountType: 'personal' | 'corporate';
-  accountTeamSize: '1-1' | '2-10' | '10-50' | '50+';
-  accountName: string;
   accountPlan: '1' | '2' | '3';
   businessName: string;
   businessDescriptor: string;
@@ -18,14 +16,12 @@ interface ICreateAccount {
 
 const inits: ICreateAccount = {
   accountType: 'personal',
-  accountTeamSize: '50+',
-  accountName: '',
   accountPlan: '1',
-  businessName: 'Keenthemes Inc.',
-  businessDescriptor: 'KEENTHEMES',
-  businessType: '1',
-  businessDescription: '',
-  businessEmail: 'corp@support.com',
+  businessName: 'Aura Vanguardista',
+  businessDescriptor: 'AURA',
+  businessType: '2',
+  businessDescription: 'Tienda de venta de ropas',
+  businessEmail: 'aura.vanguardista@gmail.com',
   nameOnCard: 'Max Doe',
   cardNumber: '4111 1111 1111 1111',
   cardExpiryMonth: '1',

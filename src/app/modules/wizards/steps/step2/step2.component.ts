@@ -25,14 +25,6 @@ export class Step2Component implements OnInit, OnDestroy {
   }
 
   initForm() {
-    this.form = this.fb.group({
-      accountTeamSize: [
-        this.defaultValues.accountTeamSize,
-        [Validators.required],
-      ],
-      accountName: [this.defaultValues.accountName, [Validators.required]],
-      accountPlan: [this.defaultValues.accountPlan, [Validators.required]],
-    });
 
     const formChangesSubscr = this.form.valueChanges.subscribe((val) => {
       this.updateParentModel(val, this.checkForm());

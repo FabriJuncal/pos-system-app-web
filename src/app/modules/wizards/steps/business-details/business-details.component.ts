@@ -25,7 +25,10 @@ export class BusinessDetailsComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.form = this.fb.group({
-      accountType: [this.defaultValues.accountType, [Validators.required]],
+      businessName: [this.defaultValues.businessName, [Validators.required]],
+      businessType: [this.defaultValues.businessType, [Validators.required]],
+      businessDescription: [this.defaultValues.businessDescription, [Validators.required]],
+      businessEmail: [this.defaultValues.businessEmail, [Validators.required]],
     });
 
     const formChangesSubscr = this.form.valueChanges.subscribe((val) => {

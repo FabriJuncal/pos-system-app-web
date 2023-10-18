@@ -25,19 +25,6 @@ export class Step3Component implements OnInit, OnDestroy {
   }
 
   initForm() {
-    this.form = this.fb.group({
-      businessName: [this.defaultValues.businessName, [Validators.required]],
-      businessDescriptor: [
-        this.defaultValues.businessDescriptor,
-        [Validators.required],
-      ],
-      businessType: [this.defaultValues.businessType, [Validators.required]],
-      businessDescription: [this.defaultValues.businessDescription],
-      businessEmail: [
-        this.defaultValues.businessEmail,
-        [Validators.required, Validators.email],
-      ],
-    });
 
     const formChangesSubscr = this.form.valueChanges.subscribe((val) => {
       this.updateParentModel(val, this.checkForm());
