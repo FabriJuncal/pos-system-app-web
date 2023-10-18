@@ -13,8 +13,6 @@ import { AuthService } from './modules/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
-import { UploadSingleImageComponent } from './components/upload-single-image/upload-single-image.component';
-import { UploadMultiImageComponent } from './components/upload-multi-image/upload-multi-image.component';
 // #fake-end#
 
 function appInitializer(authService: AuthService) {

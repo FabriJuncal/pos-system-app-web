@@ -18,6 +18,7 @@ import { BusinessDetailsComponent } from './steps/business-details/business-deta
 import { BusinessBrandingComponent } from './steps/business-branding/business-branding.component';
 import { UploadSingleImageComponent } from '../../components/upload-single-image/upload-single-image.component';
 import { UploadMultiImageComponent } from '../../components/upload-multi-image/upload-multi-image.component';
+import { ImageService } from '../../services/image.service';
 
 @NgModule({
   declarations: [
@@ -43,5 +44,8 @@ import { UploadMultiImageComponent } from '../../components/upload-multi-image/u
     NgbTooltipModule,
     SharedModule
   ],
+  providers:[
+    ImageService
+  ]
 })
 export class WizardsModule {}

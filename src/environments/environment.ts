@@ -2,12 +2,16 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const urlHosting = 'http://localhost/';
+const urlImages = 'uploads/'
+
 export const environment = {
   production: false,
   appVersion: 'v8.1.8',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
-  apiUrl: 'http://localhost/api',
+  apiUrl: urlHosting + 'api',
+  logosUrl: urlHosting + urlImages + 'logos/',
   appThemeName: 'Metronic',
   appPurchaseUrl: 'https://1.envato.market/EA4JP',
   appHTMLIntegration:
