@@ -72,12 +72,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.hasError = false;
     const loginSubscr = this.authService
       .login(this.f.email.value, this.f.password.value)
-      .pipe(first())
+      // .pipe(first())
       .subscribe((user: UserModel | undefined) => {
         console.log('user->', user);
         if (user) {
-          this.returnUrl = user.initiated ? 'dashboard' : '/crafted/pages/wizards/vertical';
+          // this.returnUrl = user.initiated ? 'dashboard' : '/crafted/pages/wizards/vertical';
+          this.returnUrl = 'dashboard';
           this.router.navigate([this.returnUrl]);
+          // document.location.reload();
         } else {
           this.hasError = true;
         }

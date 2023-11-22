@@ -173,7 +173,7 @@ import { SharedModule } from "../../../shared/shared.module";
     InlineSVGModule,
     NgApexchartsModule,
     NgbDropdownModule,
-    SharedModule
+    SharedModule  // Keenicon
   ],
   exports: [
     // Advanced Tables

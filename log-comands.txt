@@ -1,0 +1,16 @@
+ng generate module modules/users --routing
+ng generate component modules/users
+ng generate service modules/users/services/users
+ng generate component modules/users/users-list
+ng generate component modules/users/components/add-users
+ng generate component modules/users/components/edit-users
+ng generate component modules/users/components/delete-users
+ng generate class modules/users/_models/users.model
+
+
+ng generate module modules/products --routing
+ng generate component modules/products
+ng generate component modules/products/list-products
+ng generate component modules/products/add-product
+ng generate component modules/products/edit-product
+ng generate component modules/products/delete-product

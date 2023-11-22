@@ -17,7 +17,6 @@ export class BusinessBrandingComponent implements OnInit, OnDestroy {
   @Input() defaultValues: Partial<ICreateAccount>;
   form: FormGroup;
   uploadSingleImageOption: UploadSingleImage;
-  uploadMultiImageOption: UploadMultiImage;
   private unsubscribe: Subscription[] = [];
 
   constructor(private fb: FormBuilder) {}
@@ -52,13 +51,9 @@ export class BusinessBrandingComponent implements OnInit, OnDestroy {
   initComponents(){
     this.uploadSingleImageOption = {
       title: '',
-      description: 'Los clientes verán el logo de la marca en su estado de cuenta. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg'
+      description: 'Los clientes verán el logo de la marca en su estado de cuenta. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg',
+      pathImage: 'logos'
     };
-
-    this.uploadMultiImageOption = {
-      text: 'Suelte los archivos aquí o haga clic para cargarlos.',
-      cantFile: 3
-    }
   }
 
   ngOnDestroy() {

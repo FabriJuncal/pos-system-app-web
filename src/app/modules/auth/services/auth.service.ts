@@ -23,6 +23,10 @@ export class AuthService implements OnDestroy {
   currentUserSubject: BehaviorSubject<UserType>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
+  type_user = 2;
+  user: any;
+  token: string;
+
   get currentUserValue(): UserType {
     return this.currentUserSubject.value;
   }
@@ -46,10 +50,9 @@ export class AuthService implements OnDestroy {
   // public methods
   login(email: string, password: string): Observable<UserType> {
     this.isLoadingSubject.next(true);
-    return this.authHttpService.login(email, password).pipe(
+    return this.authHttpService.login(email, password, this.type_user).pipe(
       map((auth: AuthModel) => {
-        const result = this.setAuthFromLocalStorage(auth);
-        return result;
+        this.setAuthFromLocalStorage(auth);
       }),
       switchMap(() => this.getUserByToken()),
       catchError((err) => {
@@ -72,6 +75,8 @@ export class AuthService implements OnDestroy {
     if (!auth || !auth.token) {
       return of(undefined);
     }
+
+    this.token = auth.token;
 
     this.isLoadingSubject.next(true);
     return this.authHttpService.getUserByToken(auth.token).pipe(
