@@ -10,6 +10,7 @@ import { DeleteUsersComponent } from './components/delete-users/delete-users.com
 import { ModalsModule, WidgetsModule } from '../../_metronic/partials';
 import { SharedModule } from 'src/app/_metronic/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UsersListComponent,
     AddUsersComponent,
     EditUsersComponent,
-    DeleteUsersComponent
+    DeleteUsersComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
