@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddUsersComponent } from '../components/add-users/add-users.component';
 import { Observable } from 'rxjs';
 import { UsersService } from '../services/users.service';
 import { ModalConfig } from '../../../_metronic/partials/layout/modals/modal.config';
 import { ModalComponent } from '../../../_metronic/partials';
+import { EditUsersComponent } from '../components/edit-users/edit-users.component';
+import { DeleteUsersComponent } from '../components/delete-users/delete-users.component';
 
 @Component({
   selector: 'app-users-list',
@@ -16,10 +18,10 @@ export class UsersListComponent implements OnInit {
 
   @ViewChild('modal') private modalComponent: ModalComponent;
 
+  formGroup: FormGroup
+
   modalAddUser: ModalConfig = {
     modalTitle: 'Crear Usuario',
-    dismissButtonLabel: 'Guardar',
-    closeButtonLabel: 'Cancel'
   };
 
   isLoading$: Observable<boolean>;
@@ -31,10 +33,12 @@ export class UsersListComponent implements OnInit {
   search: string;
 
   users: any = [];
+  validatePassword: any;
 
   constructor(
     private fb: FormBuilder,
-    private _userService: UsersService
+    private _userService: UsersService,
+    private modelService: NgbModal
     ) { }
 
   ngOnInit(): void {
@@ -58,48 +62,60 @@ export class UsersListComponent implements OnInit {
     this.allUsers()
   }
 
-  async addUser(){
-    return await this.modalComponent.open();
+  addUser(){
+    const modalRef = this.modelService.open(AddUsersComponent, {centered: true, size: 'md'});
+    modalRef.result.then(
+      () => {
+
+      },
+      () => {
+
+      }
+    )
+
+    modalRef.componentInstance.usersE.subscribe((resp:any) => {
+      this.users.unshift(resp);
+    });
   }
 
-  // loadPage(index){
-  //   this.allUsers(index);
-  // }
+  loadPage(index: any){
+    this.allUsers(index);
+  }
 
-  // editUser(user){
-  //   const modalRef = this.modelService.open(EditUsersComponent, {centered: true, size: 'md'});
-  //   modalRef.componentInstance.user_selected = user;
-  //   modalRef.result.then(
-  //     () => {
+  editUser(user: any){
+    const modalRef = this.modelService.open(EditUsersComponent, {centered: true, size: 'md'});
+    modalRef.componentInstance.user_selected = user;
+    modalRef.result.then(
+      () => {
 
-  //     },
-  //     () => {
+      },
+      () => {
 
-  //     }
-  //   )
+      }
+    )
 
-  //   modalRef.componentInstance.usersE.subscribe((resp:any) => {
-  //     const INDEX = this.users.findIndex(user => user.id === resp.id);
-  //     this.users[INDEX] = resp;
-  //   });
-  // }
+    modalRef.componentInstance.usersE.subscribe((resp:any) => {
+      const INDEX = this.users.findIndex((user: any) => user.id === resp.id);
+      this.users[INDEX] = resp;
+    });
+  }
 
-  // delete(user){
-  //   const modalRef = this.modelService.open(DeleteUserComponent, {centered: true, size: 'md'});
-  //   modalRef.componentInstance.user_selected = user;
-  //   modalRef.result.then(
-  //     () => {
+  delete(user: any){
+    const modalRef = this.modelService.open(DeleteUsersComponent, {centered: true, size: 'md'});
+    modalRef.componentInstance.user_selected = user;
+    modalRef.result.then(
+      () => {
 
-  //     },
-  //     () => {
+      },
+      () => {
 
-  //     }
-  //   )
+      }
+    )
 
-  //   modalRef.componentInstance.usersE.subscribe((resp:any) => {
-  //     const INDEX = this.users.findIndex(user => user.id === resp.id);
-  //     this.users.splice(INDEX, 1);
-  //   });
-  // }
+    modalRef.componentInstance.usersE.subscribe((resp:any) => {
+      const INDEX = this.users.findIndex((user: any) => user.id === resp.id);
+      this.users.splice(INDEX, 1);
+    });
+  }
 
 }

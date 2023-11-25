@@ -1,18 +1,18 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 // import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from '../../services/users.service';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-// import { Toaster } from 'ngx-toast-notifications';
-// import { NoticyAlertComponent } from '../../../../componets/notifications/noticy-alert/noticy-alert.component';
+
+import { NgbActiveModal, } from '@ng-bootstrap/ng-bootstrap';
+import { catchError, of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-users',
   templateUrl: './add-users.component.html',
   styleUrls: ['./add-users.component.scss']
 })
-export class AddUsersComponent implements OnInit {
+export class AddUsersComponent implements OnInit  {
 
   @Output() usersE: EventEmitter<any> = new EventEmitter();
 
@@ -25,7 +25,9 @@ export class AddUsersComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _userService: UsersService
+    private _userService: UsersService,
+    public modal: NgbActiveModal,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -95,13 +97,14 @@ export class AddUsersComponent implements OnInit {
     .pipe(
       catchError((message) => {
         this.errorMessage = message.error.errors;
-        // this.toaster.open(NoticyAlertComponent, {text: `danger-${this.errorMessage}`});
+        this.toastr.error(this.errorMessage);
+
         return of(undefined);
       })
     ).subscribe((resp:any) => {
-      if(resp.status){
-        // this.toaster.open(NoticyAlertComponent, {text: `primary-${resp.message}`});
-        // this.modal.close();
+      if(resp && resp.status){
+        this.modal.close();
+        this.toastr.success(resp.message);
         this.usersE.emit(resp.user);
       }
     });
