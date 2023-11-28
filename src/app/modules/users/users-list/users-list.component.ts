@@ -29,7 +29,7 @@ export class UsersListComponent implements OnInit {
   totalPages = 1;
   currentPage = 1;
 
-  state: string;
+  state = '';
   search: string;
 
   users: any = [];
