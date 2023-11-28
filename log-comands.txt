@@ -8,9 +8,12 @@ ng generate component modules/users/components/delete-users
 ng generate class modules/users/_models/users.model
 
 
-ng generate module modules/products --routing
-ng generate component modules/products
-ng generate component modules/products/list-products
-ng generate component modules/products/add-product
-ng generate component modules/products/edit-product
-ng generate component modules/products/delete-product
+ng generate module modules/categorie --routing
+ng generate component modules/categorie
+ng generate service modules/categorie/_services/categorie
+ng generate component modules/categorie/categorie-list
+ng generate component modules/categorie/components/add-categorie
+ng generate component modules/categorie/components/edit-categorie
+ng generate component modules/categorie/components/delete-categorie
+ng generate component modules/categorie/components/delete-categorie
+ng generate class modules/categorie/_models/categorie.model

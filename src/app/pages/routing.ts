@@ -18,6 +18,11 @@ const Routing: Routes = [
     // data: { layout: 'light-sidebar' }, // Agrega el tema light al módulo
   },
   {
+    path: 'categorie',
+    loadChildren: () =>
+      import('../modules/categorie/categorie.module').then((m) => m.CategorieModule),
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',

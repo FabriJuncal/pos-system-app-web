@@ -3,7 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 
 const urlHosting = 'http://localhost/';
-const urlImages = 'uploads/'
 
 export const environment = {
   production: false,
@@ -11,7 +10,7 @@ export const environment = {
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
   apiUrl: urlHosting + 'api',
-  logosUrl: urlHosting + urlImages + 'logos/',
+  urlImages: urlHosting + 'uploads',
   appThemeName: 'Metronic',
   appPurchaseUrl: 'https://1.envato.market/EA4JP',
   appHTMLIntegration:
