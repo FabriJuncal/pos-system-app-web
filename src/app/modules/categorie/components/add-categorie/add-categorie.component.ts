@@ -94,7 +94,7 @@ export class AddCategorieComponent implements OnInit {
 
   initComponents(){
     this.uploadSingleImageOption = {
-      title: '',
+      title: 'Imagen de Categoría',
       description: 'Los clientes verán la imagen de la categoría en su sitio web. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg',
       pathImage: 'categories'
     };

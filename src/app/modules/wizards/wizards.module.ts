@@ -16,8 +16,6 @@ import { WelcomeComponent } from './steps/welcome/welcome.component';
 import { AccountTypeComponent } from './steps/account-type/account-type.component';
 import { BusinessDetailsComponent } from './steps/business-details/business-details.component';
 import { BusinessBrandingComponent } from './steps/business-branding/business-branding.component';
-import { UploadSingleImageComponent } from '../../components/upload-single-image/upload-single-image.component';
-import { UploadMultiImageComponent } from '../../components/upload-multi-image/upload-multi-image.component';
 import { ImageService } from '../../services/image.service';
 
 @NgModule({
@@ -30,8 +28,6 @@ import { ImageService } from '../../services/image.service';
     Step3Component,
     Step4Component,
     Step5Component,
-    UploadSingleImageComponent,
-    UploadMultiImageComponent,
     WelcomeComponent,
     AccountTypeComponent,
     BusinessDetailsComponent,

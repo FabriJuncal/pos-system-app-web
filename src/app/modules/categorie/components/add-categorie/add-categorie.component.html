@@ -20,6 +20,9 @@
     <form class="form form-label-right">
       <div class="form-group row">
           <div class="col-12">
+            <app-upload-single-image [options]="uploadSingleImageOption" ></app-upload-single-image>
+          </div>
+          <div class="col-12">
               <label class="form-label">Nombres de Categoria: *</label>
               <input type="text"
               class="form-control form-control-solid form-control-lg"
@@ -27,16 +30,6 @@
               placeholder="Nombre"
               autocomplete="off"
               [(ngModel)]="name">
-          </div>
-          <div class="col-12 py-2">
-            <label class="form-label">Sube tu imagen: *</label>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile"  accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"  (change)="processFile($event)">
-                <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-          </div>
-          <div class="col-12 py-2" style="text-align: center" *ngIf="image_preview">
-            <img [src]="image_preview" class="w-100" style="max-width: 115px;" alt="">
           </div>
           <div class="col-12 py-2">
             <label class="form-label">Icono de Categoria: *</label>
