@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategorieService } from '../../services/categorie.service';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { UploadSingleImage } from '../../../../components/upload-single-image/upload-single-image';
@@ -21,10 +21,13 @@ export class AddCategorieComponent implements OnInit {
   isLoading$: any;
   isLoading = false;
 
+  isValidImage = false;
+  isValidName = false;
+  isValidIcon = false;
+
   name: string;
   icon: string;
   image_file: any;
-  image_preview: any;
 
   constructor(
     private _categorieService: CategorieService,
@@ -46,10 +49,6 @@ export class AddCategorieComponent implements OnInit {
     this.image_file = $event.target.files[0];
 
     this.readImageAsDataUrl(this.image_file)
-      .then((result) => {
-        this.image_preview = result;
-        console.log(this.image_preview);
-      })
       .catch((error) => {
         console.error('Error al leer la imagen:', error);
       });
@@ -72,6 +71,12 @@ export class AddCategorieComponent implements OnInit {
   }
 
   save(){
+
+    if(this.validateFields()){
+      this.toastr.error('DEBE COMPLETAR TODOS LOS CAMPOS');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('name', this.name);
     formData.append('image_file', this.image_file);
@@ -94,10 +99,28 @@ export class AddCategorieComponent implements OnInit {
 
   initComponents(){
     this.uploadSingleImageOption = {
-      title: 'Imagen de Categoría',
+      title: 'Imagen de Categoría: *',
       description: 'Los clientes verán la imagen de la categoría en su sitio web. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg',
-      pathImage: 'categories'
+      pathImage: 'categories',
+      imagePreview: ''
     };
+  }
+
+  imageSelected(imagen: any){
+    console.log('imagenSelected->', imagen);
+    this.image_file = imagen;
+  }
+
+  validateFields(){
+    this.isValidImage = this.image_file ? false : true;
+    this.isValidName = this.name ? false : true;
+    this.isValidIcon = this.icon ? false : true;
+
+    if(this.isValidImage || this.isValidName || this.isValidIcon){
+      return true;
+    }
+
+    return false;
   }
 
 }

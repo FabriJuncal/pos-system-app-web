@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategorieService } from '../../services/categorie.service';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CategorieModel } from '../../models/categorie.model';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { UploadSingleImage } from '../../../../components/upload-single-image/upload-single-image';
 
 @Component({
   selector: 'app-edit-categorie',
@@ -19,14 +20,19 @@ export class EditCategorieComponent implements OnInit {
 
   URL_IMAGE_CATEGORIE= `${environment.urlImages}/categories/`;
 
+  uploadSingleImageOption: UploadSingleImage;
+
   errorMessage: string;
   isLoading$: any;
   isLoading = false;
 
+  isValidImage = false;
+  isValidName = false;
+  isValidIcon = false;
+
   name: string;
   icon: string;
   image_file: any;
-  image_preview: any;
 
   constructor(
     private _categorieService: CategorieService,
@@ -37,12 +43,13 @@ export class EditCategorieComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading$ = this._categorieService.isLoading$;
     this.loadForm();
+    this.initComponents();
   }
 
   loadForm(){
+    this.image_file = this.URL_IMAGE_CATEGORIE + this.categorie_selected.image;
     this.name = this.categorie_selected.name;
     this.icon = this.categorie_selected.icon;
-    this.image_preview = this.URL_IMAGE_CATEGORIE + this.categorie_selected.image;
   }
 
   processFile($event: any) {
@@ -54,14 +61,11 @@ export class EditCategorieComponent implements OnInit {
     this.image_file = $event.target.files[0];
 
     this.readImageAsDataUrl(this.image_file)
-      .then((result) => {
-        this.image_preview = result;
-        console.log(this.image_preview);
-      })
       .catch((error) => {
         console.error('Error al leer la imagen:', error);
       });
   }
+
 
   readImageAsDataUrl(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -80,6 +84,12 @@ export class EditCategorieComponent implements OnInit {
   }
 
   save(){
+
+    if(this.validateFields()){
+      this.toastr.error('DEBE COMPLETAR TODOS LOS CAMPOS');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('name', this.name);
     formData.append('image_file', this.image_file);
@@ -98,6 +108,32 @@ export class EditCategorieComponent implements OnInit {
         this.categoriesE.emit(resp.categorie);
       }
     });
+  }
+
+  initComponents(){
+    this.uploadSingleImageOption = {
+      title: 'Imagen de Categoría: *',
+      description: 'Los clientes verán la imagen de la categoría en su sitio web. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg',
+      pathImage: 'categories',
+      imagePreview: this.URL_IMAGE_CATEGORIE + this.categorie_selected.image
+    };
+  }
+
+  imageSelected(imagen: any){
+    console.log('imagenSelected->', imagen);
+    this.image_file = imagen;
+  }
+
+  validateFields(){
+    this.isValidImage = this.image_file ? false : true;
+    this.isValidName = this.name ? false : true;
+    this.isValidIcon = this.icon ? false : true;
+
+    if(this.isValidImage || this.isValidName || this.isValidIcon){
+      return true;
+    }
+
+    return false;
   }
 
 

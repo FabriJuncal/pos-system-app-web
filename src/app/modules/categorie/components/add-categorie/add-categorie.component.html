@@ -19,8 +19,8 @@
 
     <form class="form form-label-right">
       <div class="form-group row">
-          <div class="col-12">
-            <app-upload-single-image [options]="uploadSingleImageOption" ></app-upload-single-image>
+          <div class="col-12" [class.is-invalid]="isValidImage">
+            <app-upload-single-image [options]="uploadSingleImageOption" (imageSelected)="imageSelected($event)"></app-upload-single-image>
           </div>
           <div class="col-12">
               <label class="form-label">Nombres de Categoria: *</label>
@@ -29,6 +29,7 @@
               name="name"
               placeholder="Nombre"
               autocomplete="off"
+              [class.is-invalid]="isValidName"
               [(ngModel)]="name">
           </div>
           <div class="col-12 py-2">
@@ -38,6 +39,7 @@
             name="icono"
             placeholder="Icono"
             autocomplete="off"
+            [class.is-invalid]="isValidIcon"
             [(ngModel)]="icon">
           </div>
       </div>
@@ -55,6 +57,7 @@
       type="button"
       class="btn btn-primary btn-elevate mr-2"
       (click)="save()"
+      [disabled]="(isLoading$ | async) === true"
     >
       <ng-container *ngIf="isLoading$ | async">
         <span class="indicator-progress" [style.display]="'block'">
