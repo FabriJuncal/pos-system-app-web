@@ -4,7 +4,7 @@
 												<div class="card-header">
 													<!--begin::Card title-->
 													<div class="card-title">
-                            <label class="form-label">{{ options.title }}:</label>
+                            <label class="form-label">{{ options.title }}</label>
 													</div>
 													<!--end::Card title-->
 												</div>
@@ -14,14 +14,14 @@
 													<!--begin::Image input-->
 													<!--begin::Image input placeholder-->
 													<!--end::Image input placeholder-->
-													<div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3"
-                          [ngStyle]="{'background-image': 'url(' + imagePreview + ')'}">
+													<div [ngClass]="imageInputClass" [ngStyle]="{'background-image': 'url(' + imagePreview + ')'}">
 														<!--begin::Preview existing avatar-->
 														<div class="image-input-wrapper w-150px h-150px"></div>
 														<!--end::Preview existing avatar-->
 														<!--begin::Label-->
-														<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-															<i class="ki-duotone ki-pencil fs-7">
+														<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="cambiar Imagen">
+															<i *ngIf="!uploadImage" class="ki-duotone ki-plus fs-7"></i>
+                              <i *ngIf="uploadImage" class="ki-duotone ki-pencil fs-7">
 																<span class="path1"></span>
 																<span class="path2"></span>
 															</i>
@@ -40,12 +40,13 @@
 														</span>
 														<!--end::Cancel-->
 														<!--begin::Remove-->
-														<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-															<i class="ki-duotone ki-cross fs-2">
-																<span class="path1"></span>
-																<span class="path2"></span>
-															</i>
-														</span>
+                            <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                            data-kt-image-input-action="remove"
+                            data-bs-toggle="tooltip"
+                            data-bs-dismiss="click"
+                            title="Remove avatar">
+                                <i class="ki-outline ki-cross fs-3"></i>
+                            </span>
 														<!--end::Remove-->
 													</div>
 													<!--end::Image input-->

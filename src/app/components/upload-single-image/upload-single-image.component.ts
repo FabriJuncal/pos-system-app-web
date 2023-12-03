@@ -1,11 +1,8 @@
-import { Component, Input, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, OnInit, Output, EventEmitter } from '@angular/core';
 import { UploadSingleImage } from './upload-single-image';
 import { ImageService } from '../../services/image.service';
-import { environment } from 'src/environments/environment';
 import { Image } from 'src/app/interfaces/image';
 import { ToastrService } from 'ngx-toastr';
-
-
 
 @Component({
   selector: 'app-upload-single-image',
@@ -14,12 +11,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UploadSingleImageComponent implements OnInit {
   @Input() options: UploadSingleImage;
-    percentDone: number;
-    uploadSuccess: boolean;
-    imageUrl: string;
-    imageName: string;
-    imageFile: File;
-    imagePreview: string;
+  @Output() imageSelected: EventEmitter<File> = new EventEmitter();
+
+  uploadImage = false;;
+  imageName: string;
+  imagePreview: string;
+  imageInputClass = 'image-input image-input-empty image-input-outline image-input-placeholder mb-3';
 
   constructor(
     private imageService: ImageService,
@@ -34,7 +31,6 @@ export class UploadSingleImageComponent implements OnInit {
   }
 
   onImageSelected(event: Event) {
-    console.log('onImageSelected->',event);
     const inputElement = event.target as HTMLInputElement;
     if (!inputElement.files) {
       this.toastr.error('ERROR AL CARGAR LA IMAGEN, INTENTE NUEVAMENTE.');
@@ -47,16 +43,14 @@ export class UploadSingleImageComponent implements OnInit {
     }
 
     const image: File =  inputElement.files[0];
-    const imageSelected: Image = {
-      name: null,
-      path: this.options.pathImage,
-      file: image
-    }
+    this.imageSelected.emit(image);
+
     // this.uploadImage(imageSelected);
     this.readImageAsDataUrl(image)
       .then((result) => {
         this.imagePreview = result;
-        console.log(this.imagePreview);
+        this.uploadImage = true;
+        this.imageInputClass = 'image-input image-input-empty image-input-outline image-input-placeholder mb-3';
         // Notifica a Angular para que actualice la vista
         this.cdr.detectChanges();
       })
@@ -81,18 +75,6 @@ export class UploadSingleImageComponent implements OnInit {
     });
   }
 
-
-  uploadImage(image: Image) {
-    this.imageService.uploadImage(image).subscribe((response: any) => {
-      console.log('Imagen subida exitosamente:', response);
-      this.imageName = response.image;
-      this.imageUrl = `${environment.urlImages}/${this.options.pathImage}/${this.imageName}`;
-      console.log('this.imageUrl->', this.imageUrl);
-      // Notifica a Angular para que actualice la vista
-      this.cdr.detectChanges();
-    });
-  }
-
   deleteImage(){
     const image: Image = {
       name: this.imageName,
@@ -109,8 +91,12 @@ export class UploadSingleImageComponent implements OnInit {
 
   // Cambia el icono de "sin logo" según el tema elegido.
   cambiarImagenDeFondo() {
-    const theme = localStorage.getItem('kt_theme_mode_value');
-    this.imagePreview = 'assets/media/svg/files/';
-    this.imagePreview = theme === 'light' ? this.imagePreview + 'blank-image.svg' :  this.imagePreview + 'blank-image-dark.svg';
+    if(this.options.imagePreview){
+      this.imagePreview = this.options.imagePreview
+    }else{
+      const theme = localStorage.getItem('kt_theme_mode_value');
+      this.imagePreview = 'assets/media/svg/files/';
+      this.imagePreview = theme === 'light' ? this.imagePreview + 'blank-image.svg' :  this.imagePreview + 'blank-image-dark.svg';
+    }
   }
 }
