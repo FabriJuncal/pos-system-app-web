@@ -31,6 +31,7 @@
     type="submit"
     class="btn btn-danger btn-elevate mr-2"
     (click)="delete()"
+    [disabled]="(isLoading$ | async) === true"
   >
     <ng-container *ngIf="isLoading$ | async">
       <span class="indicator-progress" [style.display]="'block'">

@@ -229,7 +229,7 @@
     type="submit"
     class="btn btn-primary btn-elevate mr-2"
     (click)="save()"
-    [disabled]="formGroup.invalid"
+    [disabled]="formGroup.invalid || (isLoading$ | async) === true"
   >
     <ng-container *ngIf="isLoading$ | async">
       <span class="indicator-progress" [style.display]="'block'">
