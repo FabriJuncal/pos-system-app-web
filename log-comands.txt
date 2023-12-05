@@ -17,3 +17,16 @@ ng generate component modules/categorie/components/edit-categorie
 ng generate component modules/categorie/components/delete-categorie
 ng generate component modules/categorie/components/delete-categorie
 ng generate class modules/categorie/_models/categorie.model
+
+
+ng generate module modules/products --routing
+ng generate component modules/products
+ng generate component modules/products/list-products
+ng generate component modules/products/add-product
+ng generate component modules/products/edit-product
+ng generate component modules/products/delete-product
+ng generate service modules/products/services/products
+ng generate class modules/products/models/products.model
+
+ng generate component components/tab
+ng generate component components/tabGroup
