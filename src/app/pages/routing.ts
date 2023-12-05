@@ -23,6 +23,11 @@ const Routing: Routes = [
       import('../modules/categorie/categorie.module').then((m) => m.CategorieModule),
   },
   {
+    path: 'products',
+    loadChildren: () =>
+      import('../modules/products/products.module').then((m) => m.ProductsModule),
+  },
+  {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',
