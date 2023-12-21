@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UploadSingleImage } from '../../../components/upload-single-image/upload-single-image';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-add-product',
@@ -10,17 +11,27 @@ import { UploadSingleImage } from '../../../components/upload-single-image/uploa
 })
 export class AddProductComponent {
 
+  public Editor = ClassicEditor;
+
   uploadSingleImageOption: UploadSingleImage;
 
   title: string;
+  slug: string;
   sku: string;
   categorie_id: number;
-  price_peso: string
-  price_usd: string;
+  price_cost: string
+  price_sale: string;
+  tags: any;
+  description: string;
+  summary: string;
+  state: boolean;
   image_file: any;
   image_preview: any;
-  summary: string;
-  description: string;
+  stock: number;
+
+
+  text: any;
+
   isLoading$: any;
 
 

@@ -13,8 +13,10 @@ import { AuthService } from './modules/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
-import { ToastrModule } from 'ngx-toastr';
 // #fake-end#
+import { ToastrModule } from 'ngx-toastr';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -44,7 +46,8 @@ function appInitializer(authService: AuthService) {
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CKEditorModule
   ],
   providers: [
     {

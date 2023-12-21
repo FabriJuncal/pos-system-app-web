@@ -12,6 +12,7 @@ import { NgbModule, NgbModalModule, NgbDatepickerModule, NgbActiveModal, NgbPagi
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { SharedModule } from "../../_metronic/shared/shared.module";
 import { ComponentsModule } from '../../components/components.module';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { ComponentsModule } from '../../components/components.module';
     NgbModalModule,
     NgbDatepickerModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+    CKEditorModule
   ]
 })
 export class ProductsModule { }
