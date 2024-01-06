@@ -14,7 +14,7 @@ import { TabGroupComponent } from './tab-group/tab-group.component';
     LoaderComponent,
     UploadSingleImageComponent,
     TabComponent,
-    TabGroupComponent,
+    TabGroupComponent
   ],
   imports: [
     CommonModule,

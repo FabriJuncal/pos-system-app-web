@@ -16,6 +16,7 @@ import { FakeAPIService } from './_fake/fake-api.service';
 // #fake-end#
 import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { TagifyModule } from 'ngx-tagify';
 
 
 function appInitializer(authService: AuthService) {
@@ -47,7 +48,8 @@ function appInitializer(authService: AuthService) {
     InlineSVGModule.forRoot(),
     NgbModule,
     ToastrModule.forRoot(),
-    CKEditorModule
+    CKEditorModule,
+    TagifyModule.forRoot()
   ],
   providers: [
     {

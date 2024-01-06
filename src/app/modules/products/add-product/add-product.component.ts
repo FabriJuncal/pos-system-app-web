@@ -3,6 +3,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UploadSingleImage } from '../../../components/upload-single-image/upload-single-image';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { TagData, TagifySettings } from 'ngx-tagify';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-add-product',
@@ -15,24 +17,38 @@ export class AddProductComponent {
 
   uploadSingleImageOption: UploadSingleImage;
 
-  title: string;
+  name: string;
   slug: string;
   sku: string;
-  categorie_id: number;
-  price_cost: string
+  barcdode: string;
+  price_cost: string;
   price_sale: string;
-  tags: any;
+  tagsValues: any;
+  tags: TagData[];
   description: string;
   summary: string;
   state: boolean;
   image_file: any;
   image_preview: any;
   stock: number;
-
+  categorie_id: number;
+  variety: any;
 
   text: any;
 
   isLoading$: any;
+
+  settings: TagifySettings = {
+    placeholder: 'Start typing...',
+    blacklist: ['fucking', 'shit'],
+    callbacks: {
+      click: (e) => { console.log(e.detail); }
+    }
+  };
+
+  whitelist$ = new BehaviorSubject<string[]>(['hello', 'world']);
+
+  readonly = false;
 
 
   constructor(
@@ -43,6 +59,16 @@ export class AddProductComponent {
   ngOnInit(): void {
     // this.isLoading$ = this._categorieService.isLoading$;
     this.initComponents();
+  }
+
+  onAdd(event: any) {
+    this.tagsValues = event.detail.value;
+    console.log('added a tag', this.tagsValues);
+  }
+
+  onRemove(event: any) {
+    this.tagsValues = event.detail.value;
+    console.log('removed a tag', this.tagsValues);
   }
 
   loadPage($event: any){

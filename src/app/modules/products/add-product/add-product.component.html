@@ -77,7 +77,7 @@
 												<div class="card-body pt-0">
 													<!--begin::Input group-->
 													<!--begin::Label-->
-													<label class="form-label">Categoría</label>
+													<label class="form-label required">Categoría</label>
 													<!--end::Label-->
 													<!--begin::Select2-->
 													<!-- <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
@@ -99,17 +99,33 @@
 													<a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" class="btn btn-light-primary btn-sm mb-10">
 													<i class="ki-duotone ki-plus fs-2"></i>Crear nueva categoría</a>
 													<!--end::Button-->
-													<!--begin::Input group-->
-													<!--begin::Label-->
-													<label class="form-label d-block">Etiquetas</label>
-													<!--end::Label-->
-													<!--begin::Input-->
-													<input name="tags" id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags" class="form-control mb-2" value="" autocomplete="off"/>
-													<!--end::Input-->
-													<!--begin::Description-->
+                          <!--begin::Label-->
+                          <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                            <span class="required">Etiquetas</span>
+                            <span class="ms-1" data-bs-toggle="tooltip" title="Specify a target priorty">
+                              <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                              </i>
+                            </span>
+                          </label>
+                          <!--end::Label-->
+                          <!--begin::Input-->
+                          <p>
+                            <input [(ngModel)]="tagsValues" name="tagsValues" hidden>
+                            <tagify
+                              name="tagsValues"
+                              [(ngModel)]="tags"
+                              readonlyValue="readonly"
+                              (add)="onAdd($event)"
+                              (remove)="onRemove($event)">
+                            </tagify>
+                          </p>
+                          <!--end::Input-->
+                          <!--begin::Description-->
 													<div class="text-muted fs-7">Agregar etiquetas a un producto.</div>
 													<!--end::Description-->
-													<!--end::Input group-->
 												</div>
 												<!--end::Card body-->
 											</div>
@@ -158,7 +174,7 @@
 																	<label name="title" class="required form-label">Nombre del Producto:</label>
 																	<!--end::Label-->
 																	<!--begin::Input-->
-																	<input type="text" name="product_name" class="form-control mb-2" placeholder="Introduce el nombre del producto" value="" autocomplete="off"/>
+																	<input type="text" name="name" class="form-control mb-2" placeholder="Introduce el nombre del producto" value="" autocomplete="off"/>
 																	<!--end::Input-->
 																	<!--begin::Description-->
 																	<div class="text-muted fs-7">Se requiere y se recomienda que un nombre de producto sea único.</div>
@@ -315,7 +331,7 @@
 																	<label class="required form-label">Código de Barras</label>
 																	<!--end::Label-->
 																	<!--begin::Input-->
-																	<input type="text" name="sku" class="form-control mb-2" placeholder="123456789012" value="" autocomplete="off"/>
+																	<input type="text" name="barcdode" class="form-control mb-2" placeholder="123456789012" value="" autocomplete="off"/>
 																	<!--end::Input-->
 																	<!--begin::Description-->
 																	<div class="text-muted fs-7">Ingresa el código de barras del producto.</div>
@@ -331,7 +347,7 @@
 																	<div class="d-flex gap-3">
 																		<!-- <input type="number" name="shelf" class="form-control mb-2" placeholder="En el estante" value="" />
 																		<input type="number" name="warehouse" class="form-control mb-2" placeholder="En Almacén" /> -->
-                                    <input type="number" name="warehouse" class="form-control mb-2" placeholder="Ingrese la cantidad de productos que tendrá en stock" autocomplete="off"/>
+                                    <input type="number" name="stock" class="form-control mb-2" placeholder="Ingrese la cantidad de productos que tendrá en stock" autocomplete="off"/>
 																	</div>
 																	<!--end::Input-->
 																	<!--begin::Description-->
@@ -383,13 +399,12 @@
 																				<div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-5">
 																					<!--begin::Select2-->
 																					<div class="w-100 w-md-200px">
-																						<select class="form-select" name="product_option" data-placeholder="Select a variation" data-kt-ecommerce-catalog-add-product="product_option">
-																							<option></option>
-																							<option value="color">Color</option>
-																							<option value="size">Size</option>
-																							<option value="material">Material</option>
-																							<option value="style">Style</option>
-																						</select>
+                                            <select
+                                            class="form-control form-select mb-2"
+                                            name="variety"
+                                            placeholder="Seleccione una categoría">
+                                              <option value="">-Seleccione una opción-</option>
+                                            </select>
 																					</div>
 																					<!--end::Select2-->
 																					<!--begin::Input-->
@@ -420,124 +435,67 @@
 														</div>
 														<!--end::Variations-->
 														<!--begin::Shipping-->
-														<div class="card card-flush py-4">
+														<!-- <div class="card card-flush py-4"> -->
 															<!--begin::Card header-->
-															<div class="card-header">
+															<!-- <div class="card-header">
 																<div class="card-title">
 																	<h2>Envío</h2>
 																</div>
-															</div>
+															</div> -->
 															<!--end::Card header-->
 															<!--begin::Card body-->
-															<div class="card-body pt-0">
+															<!-- <div class="card-body pt-0"> -->
 																<!--begin::Input group-->
-																<div class="fv-row">
+																<!-- <div class="fv-row"> -->
 																	<!--begin::Input-->
-																	<div class="form-check form-check-custom form-check-solid mb-2">
+																	<!-- <div class="form-check form-check-custom form-check-solid mb-2">
 																		<input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" autocomplete="off"/>
 																		<label class="form-check-label">Este es un producto físico.</label>
-																	</div>
+																	</div> -->
 																	<!--end::Input-->
 																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Establece si el producto es un artículo físico o digital. Los productos físicos pueden requerir envío.</div>
+																	<!-- <div class="text-muted fs-7">Establece si el producto es un artículo físico o digital. Los productos físicos pueden requerir envío.</div> -->
 																	<!--end::Description-->
-																</div>
+																<!-- </div> -->
 																<!--end::Input group-->
 																<!--begin::Shipping form-->
-																<div id="kt_ecommerce_add_product_shipping" class="d-none mt-10">
+																<!-- <div id="kt_ecommerce_add_product_shipping" class="d-none mt-10"> -->
 																	<!--begin::Input group-->
-																	<div class="mb-10 fv-row">
+																	<!-- <div class="mb-10 fv-row"> -->
 																		<!--begin::Label-->
-																		<label class="form-label">Peso</label>
+																		<!-- <label class="form-label">Peso</label> -->
 																		<!--end::Label-->
 																		<!--begin::Editor-->
-																		<input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="" autocomplete="off"/>
+																		<!-- <input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="" autocomplete="off"/> -->
 																		<!--end::Editor-->
 																		<!--begin::Description-->
-																		<div class="text-muted fs-7">Establezca un peso del producto en kilogramos (kg).</div>
+																		<!-- <div class="text-muted fs-7">Establezca un peso del producto en kilogramos (kg).</div> -->
 																		<!--end::Description-->
-																	</div>
+																	<!-- </div> -->
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
-																	<div class="fv-row">
+																	<!-- <div class="fv-row"> -->
 																		<!--begin::Label-->
-																		<label class="form-label">Dimensión</label>
+																		<!-- <label class="form-label">Dimensión</label> -->
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<div class="d-flex flex-wrap flex-sm-nowrap gap-3">
+																		<!-- <div class="d-flex flex-wrap flex-sm-nowrap gap-3">
 																			<input type="number" name="width" class="form-control mb-2" placeholder="Ancho (AN)" value="" autocomplete="off"/>
 																			<input type="number" name="height" class="form-control mb-2" placeholder="Altura (AL)" value="" autocomplete="off"/>
 																			<input type="number" name="length" class="form-control mb-2" placeholder="Longitud (lO)" value="" autocomplete="off"/>
-																		</div>
+																		</div> -->
 																		<!--end::Input-->
 																		<!--begin::Description-->
-																		<div class="text-muted fs-7">Ingrese las dimensiones del producto en centímetros (cm).</div>
+																		<!-- <div class="text-muted fs-7">Ingrese las dimensiones del producto en centímetros (cm).</div> -->
 																		<!--end::Description-->
-																	</div>
+																	<!-- </div> -->
 																	<!--end::Input group-->
-																</div>
+																<!-- </div> -->
 																<!--end::Shipping form-->
-															</div>
+															<!-- </div> -->
 															<!--end::Card header-->
-														</div>
+														<!-- </div> -->
 														<!--end::Shipping-->
-														<!--begin::Meta options-->
-														<div class="card card-flush py-4">
-															<!--begin::Card header-->
-															<div class="card-header">
-																<div class="card-title">
-																	<h2>Metaopciones</h2>
-																</div>
-															</div>
-															<!--end::Card header-->
-															<!--begin::Card body-->
-															<div class="card-body pt-0">
-																<!--begin::Input group-->
-																<div class="mb-10">
-																	<!--begin::Label-->
-																	<label class="form-label">Título de la metaetiqueta</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-																	<input type="text" class="form-control mb-2" name="meta_title" placeholder="Meta tag name" autocomplete="off"/>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Establece un título de metaetiqueta. Se recomienda que sean palabras clave simples y precisas.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-																<!--begin::Input group-->
-																<div class="mb-10">
-																	<!--begin::Label-->
-																	<label class="form-label">Descripción de Meta Etiqueta</label>
-																	<!--end::Label-->
-                                  <!--  USAR EL COMPONENTE: https://ckeditor.com/docs/ckeditor5/latest/installation/integrations/angular.html -->
-																	<!--end::Label-->
-																	<!--begin::Editor-->
-                                  <ckeditor [editor]="Editor"></ckeditor>
-																	<!--end::Editor-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Establezca una descripción de metaetiqueta para el producto para aumentar la clasificación SEO.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-																<!--begin::Input group-->
-																<div>
-																	<!--begin::Label-->
-																	<label class="form-label">Palabras clave de metaetiqueta</label>
-																	<!--end::Label-->
-																	<!--begin::Editor-->
-																	<input id="kt_ecommerce_add_product_meta_keywords" name="kt_ecommerce_add_product_meta_keywords" class="form-control mb-2" autocomplete="off"/>
-																	<!--end::Editor-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Establezca una lista de palabras clave con las que está relacionado el producto. Separe las palabras clave agregando una coma.
-																	<code>,</code>entre cada palabra clave.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-															</div>
-															<!--end::Card header-->
-														</div>
-														<!--end::Meta options-->
 													</div>
                         </app-tab>
                       </app-tab-group>

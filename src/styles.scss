@@ -11,11 +11,18 @@
 @import "./assets/plugins/keenicons/outline/style.css";
 @import "./assets/plugins/keenicons/solid/style.css";
 
+// Estilos para el componente Toastr: https://github.com/scttcper/ngx-toastr
 @import 'ngx-toastr/toastr-bs5-alert';
-
 
 .toast-success, .toast-error, .toast-warning, .toast-info{
   color: white !important;
+}
+
+@import "node_modules/ngx-tagify/styles/tagify.scss";
+
+// Estilos para el componente Tagify: https://github.com/Brakebein/ngx-tagify#styling
+.tagify__tag{
+  margin: 5px !important;
 }
 
 
