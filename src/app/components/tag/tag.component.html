@@ -1,0 +1,9 @@
+<!--  USAR EL COMPONENTE: https://ckeditor.com/docs/ckeditor5/latest/installation/integrations/angular.html -->
+<tagify
+  name="tagsValues"
+  [(ngModel)]="tags"
+  readonlyValue="readonly"
+  (add)="onAdd($event)"
+  (remove)="onRemove($event)"
+  [settings]="settings">
+</tagify>

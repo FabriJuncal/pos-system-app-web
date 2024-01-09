@@ -6,6 +6,9 @@ import { UploadSingleImageComponent } from './upload-single-image/upload-single-
 import { SharedModule } from '../_metronic/shared/shared.module';
 import { TabComponent } from './tab/tab.component';
 import { TabGroupComponent } from './tab-group/tab-group.component';
+import { TagComponent } from './tag/tag.component';
+import { TagifyModule } from 'ngx-tagify';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,18 +17,23 @@ import { TabGroupComponent } from './tab-group/tab-group.component';
     LoaderComponent,
     UploadSingleImageComponent,
     TabComponent,
-    TabGroupComponent
+    TabGroupComponent,
+    TagComponent
   ],
   imports: [
     CommonModule,
     NgbToastModule,
-    SharedModule
+    SharedModule,
+    TagifyModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     LoaderComponent,
     UploadSingleImageComponent,
     TabComponent,
-    TabGroupComponent
+    TabGroupComponent,
+    TagComponent
   ]
 })
 export class ComponentsModule { }

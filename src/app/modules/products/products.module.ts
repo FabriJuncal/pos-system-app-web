@@ -13,7 +13,6 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
 import { SharedModule } from "../../_metronic/shared/shared.module";
 import { ComponentsModule } from '../../components/components.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { TagifyModule } from 'ngx-tagify';
 
 
 @NgModule({
@@ -39,8 +38,7 @@ import { TagifyModule } from 'ngx-tagify';
     NgbDatepickerModule,
     SharedModule,
     ComponentsModule,
-    CKEditorModule,
-    TagifyModule
+    CKEditorModule
   ]
 })
 export class ProductsModule { }

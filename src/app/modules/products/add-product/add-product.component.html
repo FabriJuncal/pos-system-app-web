@@ -114,13 +114,7 @@
                           <!--begin::Input-->
                           <p>
                             <input [(ngModel)]="tagsValues" name="tagsValues" hidden>
-                            <tagify
-                              name="tagsValues"
-                              [(ngModel)]="tags"
-                              readonlyValue="readonly"
-                              (add)="onAdd($event)"
-                              (remove)="onRemove($event)">
-                            </tagify>
+                            <app-tag></app-tag>
                           </p>
                           <!--end::Input-->
                           <!--begin::Description-->
