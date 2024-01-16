@@ -13,10 +13,13 @@ export class TagComponent {
   tags: TagData[];
 
   settings: TagifySettings = {
-    placeholder: 'Start typing...',
+    placeholder: 'Comienza a escribir...',
     blacklist: ['fucking', 'shit'],
     tagTextProp: 'name',
     skipInvalid: true,
+    // classNames: {
+    //   input: 'form-control mb-2'
+    // },
     dropdown: {
       closeOnSelect: false,
       enabled: 0,
@@ -60,6 +63,7 @@ export class TagComponent {
         `;
       },
       dropdownHeader(suggestions) {
+        // ACÁ SE ENCUENTRA EL ERROR QUE AL SELECCIONAR UNA OPCIÓN SE DESACOMODA EL HEADER DEL LISTADO DE TAGS
         return `
           <header data-selector='tagify-suggestions-header' class="${this.settings.classNames.dropdownItem} ${this.settings.classNames.dropdownItem}__addAll">
             <div>
@@ -92,12 +96,11 @@ export class TagComponent {
       'dropdown:show': (event) => {
         console.log(event);
       },
-      'dropdown:select': (event) => {
+      'dropdown:select': (event: any) => {
         const tagify = event.detail.tagify;
-        if (
-          event.detail.event instanceof MouseEvent &&
-          (event.detail.event.target as HTMLElement).matches('.remove-all-tags')
-        ) {
+
+        if (event.detail.event.toElement.className === 'remove-all-tags'){
+          console.log('event.detail.event.toElement.className->', event.detail.event.toElement.className);
           tagify.removeAllTags();
         } else if (event.detail.elm.classList.contains(`${tagify.settings.classNames.dropdownItem}__addAll`)) {
           tagify.dropdown.selectAll();
@@ -205,15 +208,15 @@ export class TagComponent {
   }
 
 
-  onAdd(event: any) {
-    this.tagsValues = event.detail.value;
-    console.log('added a tag', this.tagsValues);
-  }
+  // onAdd(event: any) {
+  //   this.tagsValues = event.detail.value;
+  //   console.log('added a tag', this.tagsValues);
+  // }
 
-  onRemove(event: any) {
-    this.tagsValues = event.detail.value;
-    console.log('removed a tag', this.tagsValues);
-  }
+  // onRemove(event: any) {
+  //   this.tagsValues = event.detail.value;
+  //   console.log('removed a tag', this.tagsValues);
+  // }
 
   private validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
