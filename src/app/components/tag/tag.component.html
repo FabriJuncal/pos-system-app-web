@@ -1,7 +1,9 @@
 <!--  DOCUMENTACIÓN DEL COMPONENTE: https://github.com/Brakebein/ngx-tagify -->
 <tagify
+  inputClass="form-control"
   name="tagsValues"
   [(ngModel)]="tags"
   readonlyValue="readonly"
-  [settings]="settings">
+  [settings]="settings"
+  [whitelist]="whitelist">
 </tagify>

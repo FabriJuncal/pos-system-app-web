@@ -38,17 +38,10 @@ export class AddProductComponent {
 
   isLoading$: any;
 
-  settings: TagifySettings = {
-    placeholder: 'Start typing...',
-    blacklist: ['fucking', 'shit'],
-    callbacks: {
-      click: (e) => { console.log(e.detail); }
-    }
-  };
-
-  whitelist$ = new BehaviorSubject<string[]>(['hello', 'world']);
-
-  readonly = false;
+  whitelist$ = new BehaviorSubject<TagData[]>([
+    {value: '1', name: 'hello'},
+    {value: '2', name: 'world'}
+  ]);
 
 
   constructor(

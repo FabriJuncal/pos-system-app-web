@@ -114,7 +114,7 @@
                           <!--begin::Input-->
                           <p>
                             <input [(ngModel)]="tagsValues" name="tagsValues" hidden>
-                            <app-tag></app-tag>
+                            <app-tag [whitelist]="whitelist$"></app-tag>
                           </p>
                           <!--end::Input-->
                           <!--begin::Description-->
