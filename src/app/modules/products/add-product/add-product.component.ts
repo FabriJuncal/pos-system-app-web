@@ -23,7 +23,6 @@ export class AddProductComponent {
   barcdode: string;
   price_cost: string;
   price_sale: string;
-  tagsValues: any;
   tags: TagData[];
   description: string;
   summary: string;
@@ -52,16 +51,6 @@ export class AddProductComponent {
   ngOnInit(): void {
     // this.isLoading$ = this._categorieService.isLoading$;
     this.initComponents();
-  }
-
-  onAdd(event: any) {
-    this.tagsValues = event.detail.value;
-    console.log('added a tag', this.tagsValues);
-  }
-
-  onRemove(event: any) {
-    this.tagsValues = event.detail.value;
-    console.log('removed a tag', this.tagsValues);
   }
 
   loadPage($event: any){
@@ -124,8 +113,11 @@ export class AddProductComponent {
   }
 
   imageSelected(imagen: any){
-    console.log('imagenSelected->', imagen);
     this.image_file = imagen;
+  }
+
+  tagsSelected(tags: TagData[]){
+    this.tags = tags;
   }
 
 }

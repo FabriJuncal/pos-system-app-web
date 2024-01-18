@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TagData, TagifySettings } from 'ngx-tagify';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,8 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 export class TagComponent {
 
   @Input() whitelist: BehaviorSubject<TagData[]>;
+  @Output() tagsSelected: EventEmitter<TagData[]> = new EventEmitter();
 
-  tagsValues: any;
+  // tagsValues: any;
   tags: TagData[];
 
   settings: TagifySettings = {
@@ -39,12 +40,12 @@ export class TagComponent {
                 ${this.getAttributes(tagData)}>
             <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
             <div>
-            ${ tagData.avatar ? 
+            ${ tagData.avatar ?
               `<div class='tagify__tag__avatar-wrap'>
                     <img src="${tagData.avatar}">
                 </div> ` : ''
             }
-            ${ tagData.name ? 
+            ${ tagData.name ?
               `<span class='tagify__tag-text'>${tagData.name}</span>` : ''
             }
             </div>
@@ -57,7 +58,7 @@ export class TagComponent {
             tabindex="0"
             tagifySuggestionIdx="${tagData.value}"
             role="option">
-            ${ tagData.avatar ? 
+            ${ tagData.avatar ?
               `<div class='tagify__dropdown__item__avatar-wrap'>
                     <img src="${tagData.avatar}">
                 </div>` : ''
@@ -71,8 +72,6 @@ export class TagComponent {
         </div>`;
       },
       dropdownHeader(suggestions) {
-        console.log('suggestions.length->',suggestions);
-        console.log('this.settings->', this.settings);
         return `
           <header data-selector='tagify-suggestions-header' class="${this.settings.classNames.dropdownItem} ${this.settings.classNames.dropdownItem}__addAll">
             <div>
@@ -113,7 +112,6 @@ export class TagComponent {
         console.log('dropdown:show->',event);
       },
       'dropdown:select': (event: any) => {
-        console.log('dropdown:select->',event);
         const tagify = event.detail.tagify;
 
         if (event.detail.event.toElement.className === 'remove-all-tags'){
@@ -123,7 +121,6 @@ export class TagComponent {
         }
       },
       'edit:start': (event) => {
-        console.log('edit:start->',event);
         event.detail.tagify.setTagTextNode(
           event.detail.tag,
           `${event.detail.data.name} ${event.detail.data.email}`
@@ -218,21 +215,16 @@ export class TagComponent {
     // ]
   };
 
-  // whitelist$ = new BehaviorSubject<string[]>(['hello', 'world']);
-
   ngOnInit(): void {
   }
 
+  onAdd(event: any) {
+    this.tagsSelected.emit(event.tags);
+  }
 
-  // onAdd(event: any) {
-  //   this.tagsValues = event.detail.value;
-  //   console.log('added a tag', this.tagsValues);
-  // }
-
-  // onRemove(event: any) {
-  //   this.tagsValues = event.detail.value;
-  //   console.log('removed a tag', this.tagsValues);
-  // }
+  onRemove(event: any) {
+    this.tagsSelected.emit(event);
+  }
 
   private validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

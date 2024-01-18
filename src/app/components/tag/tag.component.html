@@ -3,6 +3,8 @@
   inputClass="form-control"
   name="tagsValues"
   [(ngModel)]="tags"
+  (add)="onAdd($event)"
+  (remove)="onRemove($event)"
   readonlyValue="readonly"
   [settings]="settings"
   [whitelist]="whitelist">
