@@ -1,5 +1,5 @@
 <!--begin::Dropzone-->
-<div class="dropzone" id="kt_ecommerce_add_product_media">
+<div class="dropzone" [dropzone]="config" (error)="onUploadError($event)" (success)="onUploadSuccess($event)">
   <!--begin::Message-->
   <div class="dz-message needsclick">
     <!--begin::Icon-->

@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UploadSingleImage } from '../../../components/upload-single-image/upload-single-image';
+import { UploadMultiImage } from '../../../components/upload-multi-image/upload-multi-image';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { TagData, TagifySettings } from 'ngx-tagify';
+import { TagData } from 'ngx-tagify';
 import { BehaviorSubject } from 'rxjs';
+
 
 @Component({
   selector: 'app-add-product',
@@ -16,6 +18,7 @@ export class AddProductComponent {
   public Editor = ClassicEditor;
 
   uploadSingleImageOption: UploadSingleImage;
+  uploadMultiImageOption: UploadMultiImage
 
   name: string;
   slug: string;
@@ -110,6 +113,11 @@ export class AddProductComponent {
       pathImage: 'products',
       imagePreview: ''
     };
+
+    this.uploadMultiImageOption = {
+      text: 'Suelte los archivos aquí o haga clic para cargarlos.',
+      cantFile: 5
+    }
   }
 
   imageSelected(imagen: any){

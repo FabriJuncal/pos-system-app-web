@@ -9,13 +9,22 @@ import { TabGroupComponent } from './tab-group/tab-group.component';
 import { TagComponent } from './tag/tag.component';
 import { TagifyModule } from 'ngx-tagify';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UploadMultiImageComponent } from './upload-multi-image/upload-multi-image.component';
+import { DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
 
 
+const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
+  // Change this to your upload POST address:
+   url: 'https://httpbin.org/post',
+   maxFilesize: 50,
+   acceptedFiles: 'image/*'
+ };
 
 @NgModule({
   declarations: [
     LoaderComponent,
     UploadSingleImageComponent,
+    UploadMultiImageComponent,
     TabComponent,
     TabGroupComponent,
     TagComponent
@@ -26,14 +35,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     TagifyModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropzoneModule
   ],
   exports: [
     LoaderComponent,
     UploadSingleImageComponent,
+    UploadMultiImageComponent,
     TabComponent,
     TabGroupComponent,
     TagComponent
+  ],
+  providers: [
+    {
+      provide: DROPZONE_CONFIG,
+      useValue: DEFAULT_DROPZONE_CONFIG
+    }
   ]
 })
 export class ComponentsModule { }
