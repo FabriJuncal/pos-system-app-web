@@ -5,7 +5,7 @@ ng generate component modules/users/users-list
 ng generate component modules/users/components/add-users
 ng generate component modules/users/components/edit-users
 ng generate component modules/users/components/delete-users
-ng generate class modules/users/_models/users.model
+ng generate class modules/users/models/users.model
 
 
 ng generate module modules/categorie --routing
@@ -15,8 +15,7 @@ ng generate component modules/categorie/categorie-list
 ng generate component modules/categorie/components/add-categorie
 ng generate component modules/categorie/components/edit-categorie
 ng generate component modules/categorie/components/delete-categorie
-ng generate component modules/categorie/components/delete-categorie
-ng generate class modules/categorie/_models/categorie.model
+ng generate class modules/categorie/models/categorie.model
 
 
 ng generate module modules/products --routing
@@ -25,8 +24,14 @@ ng generate component modules/products/list-products
 ng generate component modules/products/add-product
 ng generate component modules/products/edit-product
 ng generate component modules/products/delete-product
+ng generate component modules/products/list-product-variations
+ng generate component modules/products/components/add-product-variations
+ng generate component modules/products/components/edit-product-variations
+ng generate component modules/products/components/delete-product-variations
 ng generate service modules/products/services/products
+ng generate service modules/products/services/product-variations
 ng generate class modules/products/models/products.model
+ng generate class modules/products/models/product-variations.model
 
 ng generate component components/tab
 ng generate component components/tabGroup

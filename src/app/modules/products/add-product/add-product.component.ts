@@ -13,7 +13,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit  {
 
   public Editor = ClassicEditor;
 
@@ -116,7 +116,7 @@ export class AddProductComponent {
 
     this.uploadMultiImageOption = {
       text: 'Suelte los archivos aquí o haga clic para cargarlos.',
-      cantFile: 5
+      countFile: 5
     }
   }
 

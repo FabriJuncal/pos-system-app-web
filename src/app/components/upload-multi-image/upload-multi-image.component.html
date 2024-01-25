@@ -1,3 +1,5 @@
+<!-- DOCUMENTACION DEL COMPONENTE: https://www.npmjs.com/package/ngx-dropzone-wrapper -->
+
 <!--begin::Dropzone-->
 <div class="dropzone" [dropzone]="config" (error)="onUploadError($event)" (success)="onUploadSuccess($event)">
   <!--begin::Message-->
@@ -11,8 +13,8 @@
     <!--begin::Info-->
     <div class="ms-4">
       <h3 class="fs-5 fw-bold text-gray-900 mb-1" *ngIf="options.text">{{ options.text }}</h3>
-      <span class="fs-7 fw-semibold text-gray-400" *ngIf="options.cantFile > 1">Sube hasta {{ options.cantFile }} archivos</span>
-      <span class="fs-7 fw-semibold text-gray-400" *ngIf="options.cantFile === 1">Sube un archivos</span>
+      <span class="fs-7 fw-semibold text-gray-400" *ngIf="options.countFile > 1">Sube hasta {{ options.countFile }} archivos</span>
+      <span class="fs-7 fw-semibold text-gray-400" *ngIf="options.countFile === 1">Sube un archivos</span>
     </div>
     <!--end::Info-->
   </div>

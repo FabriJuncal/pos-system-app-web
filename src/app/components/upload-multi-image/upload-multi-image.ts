@@ -1,4 +1,4 @@
 export interface UploadMultiImage {
   text: string;
-  cantFile: number;
+  countFile: number;
 }

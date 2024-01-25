@@ -13,6 +13,10 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
 import { SharedModule } from "../../_metronic/shared/shared.module";
 import { ComponentsModule } from '../../components/components.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ListProductVariationsComponent } from './components/list-product-variations/list-product-variations.component';
+import { AddProductVariationsComponent } from './components/add-product-variations/add-product-variations.component';
+import { EditProductVariationsComponent } from './components/edit-product-variations/edit-product-variations.component';
+import { DeleteProductVariationsComponent } from './components/delete-product-variations/delete-product-variations.component';
 
 
 @NgModule({
@@ -21,7 +25,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ListProductsComponent,
     AddProductComponent,
     EditProductComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    ListProductVariationsComponent,
+    AddProductVariationsComponent,
+    EditProductVariationsComponent,
+    DeleteProductVariationsComponent
   ],
   providers: [
     NgbActiveModal,
