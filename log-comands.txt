@@ -35,3 +35,7 @@ ng generate class modules/products/models/product-variations.model
 
 ng generate component components/tab
 ng generate component components/tabGroup
+ng generate component components/loader
+ng generate component components/single-image
+ng generate component components/multi-image
+ng generate component components/info-message

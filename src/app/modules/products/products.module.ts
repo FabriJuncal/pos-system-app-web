@@ -17,6 +17,7 @@ import { ListProductVariationsComponent } from './components/list-product-variat
 import { AddProductVariationsComponent } from './components/add-product-variations/add-product-variations.component';
 import { EditProductVariationsComponent } from './components/edit-product-variations/edit-product-variations.component';
 import { DeleteProductVariationsComponent } from './components/delete-product-variations/delete-product-variations.component';
+import { NgxColorsModule } from 'ngx-colors';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { DeleteProductVariationsComponent } from './components/delete-product-va
     NgbDatepickerModule,
     SharedModule,
     ComponentsModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxColorsModule
   ]
 })
 export class ProductsModule { }

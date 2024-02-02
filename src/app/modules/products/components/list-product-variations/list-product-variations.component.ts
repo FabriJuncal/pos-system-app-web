@@ -53,7 +53,7 @@ export class ListProductVariationsComponent implements OnInit   {
   }
 
   addProductVariations(){
-    const modalRef = this.modelService.open(AddProductVariationsComponent, {centered: true, size: 'sm'});
+    const modalRef = this.modelService.open(AddProductVariationsComponent, {centered: true, size: 'lg'});
     modalRef.result.then(
       () => {
 
@@ -70,7 +70,7 @@ export class ListProductVariationsComponent implements OnInit   {
 
   editProductVariations(productVariation: any){
     console.log('productVariation->', productVariation);
-    const modalRef = this.modelService.open(EditProductVariationsComponent, {centered: true, size: 'sm'});
+    const modalRef = this.modelService.open(EditProductVariationsComponent, {centered: true, size: 'lg'});
     modalRef.componentInstance.productVariation_selected = productVariation;
     modalRef.result.then(
       () => {

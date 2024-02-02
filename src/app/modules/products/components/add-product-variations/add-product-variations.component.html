@@ -10,7 +10,7 @@
       <i class="icon-2x text-dark-50 flaticon-price-tag mx-2"></i> Crear Variación
     </div>
   </div>
-  <div class="overlay overlay-block cursor-default modal-body">
+  <div class="overlay cursor-default modal-body">
     <ng-container *ngIf="isLoading$ | async">
       <div class="overlay-layer bg-transparent">
         <div class="spinner spinner-lg spinner-success" style="z-index: 9999"></div>
@@ -19,29 +19,71 @@
 
     <form class="form form-label-right">
       <div class="form-group row">
-          <div class="col-12" [class.is-invalid]="isValidImage">
-            <app-upload-single-image [options]="uploadSingleImageOption" (imageSelected)="imageSelected($event)"></app-upload-single-image>
+        <div class="col-6" [class.is-invalid]="isValidImage">
+          <app-upload-single-image [options]="uploadSingleImageOption" (imageSelected)="imageSelected($event)"></app-upload-single-image>
+          <app-info-message [options]="infoMessageOption"></app-info-message>
+        </div>
+        <div class="form-group col-6">
+          <div class="row">
+              <label class="form-label">Color:</label>
+              <div class="d-flex align-items-center">
+                <ngx-colors
+                  ngx-colors-trigger
+                  [(ngModel)]="color"
+                  name="color"
+                  [hideTextInput]="hideTextInput"
+                  [acceptLabel]="acceptLabel"
+                  [cancelLabel]="cancelLabel"></ngx-colors>
+                <input
+                  type="text"
+                  class="form-control form-control-solid form-control-lg"
+                  name="color"
+                  placeholder="Color"
+                  autocomplete="off"
+                  [class.is-invalid]="isValidColor"
+                  [(ngModel)]="color">
+              </div>
+              <div class="text-muted fs-7 mb-1">Elige el color o completa el campo con el código hexadecimal.</div>
           </div>
-          <div class="col-12">
-              <label class="form-label required">Nombres de Categoria:</label>
-              <input type="text"
-              class="form-control form-control-solid form-control-lg"
-              name="name"
-              placeholder="Nombre"
-              autocomplete="off"
-              [class.is-invalid]="isValidName"
-              [(ngModel)]="name">
-          </div>
-          <div class="col-12 py-2">
-            <label class="form-label required">Icono de Categoria:</label>
+          <div class="row">
+            <label class="form-label">Material:</label>
             <input type="text"
             class="form-control form-control-solid form-control-lg"
-            name="icono"
-            placeholder="Icono"
+            name="material"
+            placeholder="Material"
             autocomplete="off"
-            [class.is-invalid]="isValidIcon"
-            [(ngModel)]="icon">
+            [class.is-invalid]="isValidMaterial"
+            [(ngModel)]="material">
           </div>
+          <div class="row">
+            <label class="form-label">Tamaño:</label>
+            <input type="text"
+            class="form-control form-control-solid form-control-lg"
+            name="size"
+            placeholder="Tamaño"
+            autocomplete="off"
+            [class.is-invalid]="isValidSize"
+            [(ngModel)]="size">
+          </div>
+          <div class="row">
+            <label class="form-label">Peso:</label>
+            <input type="text"
+            class="form-control form-control-solid form-control-lg"
+            name="weight"
+            placeholder="Peso"
+            autocomplete="off"
+            [(ngModel)]="weight">
+          </div>
+          <div class="row">
+            <label class="form-label">Cantidad:</label>
+            <input type="text"
+            class="form-control form-control-solid form-control-lg"
+            name="quantity"
+            placeholder="Cantidad"
+            autocomplete="off"
+            [(ngModel)]="quantity">
+          </div>
+        </div>
       </div>
     </form>
 </div>

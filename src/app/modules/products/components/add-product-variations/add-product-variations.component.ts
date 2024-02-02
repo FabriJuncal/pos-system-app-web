@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { UploadSingleImage } from '../../../../components/upload-single-image/upload-single-image';
 import { ProductVariationsService } from '../../services/product-variations.service';
+import { InfoMessageModel } from 'src/app/components/info-message/info-message.model';
 
 @Component({
   selector: 'app-add-product-variations',
@@ -16,18 +17,28 @@ export class AddProductVariationsComponent implements OnInit {
   @Output() variationsE: EventEmitter<any> = new EventEmitter();
 
   uploadSingleImageOption: UploadSingleImage;
+  infoMessageOption: InfoMessageModel;
+  hideTextInput = true;
+  acceptLabel = 'Aceptar';
+  cancelLabel = 'cancelar';
 
   errorMessage: string;
   isLoading$: any;
   isLoading = false;
 
   isValidImage = false;
-  isValidName = false;
-  isValidIcon = false;
+  isValidColor = false;
+  isValidMaterial = false;
+  isValidSize = false;
+  isValidWeight = false;
+  isValidQuantity = false;
 
-  name: string;
-  icon: string;
   image_file: any;
+  color: string;
+  material: string;
+  size: string;
+  weight: string;
+  quantity: string;
 
   constructor(
     private _productVariationsService: ProductVariationsService,
@@ -78,9 +89,9 @@ export class AddProductVariationsComponent implements OnInit {
     }
 
     const formData = new FormData();
-    formData.append('name', this.name);
+    formData.append('name', this.color);
     formData.append('image_file', this.image_file);
-    formData.append('icon', this.icon);
+    // formData.append('icon', this.icon);
     this._productVariationsService.createProductVariations(formData)
     .pipe(
       catchError((message) => {
@@ -104,6 +115,14 @@ export class AddProductVariationsComponent implements OnInit {
       pathImage: 'variations',
       imagePreview: ''
     };
+
+    this.infoMessageOption = {
+      title: 'Puntos a tener en cuenta:',
+      items: [
+        'Si no agregan una imagen, se utilizará la imagen de portada para mostrar esta variación del producto.',
+        'Es obligatorio completar algunos de los siguientes campos: Color, Material, Tamaño.'
+      ]
+    }
   }
 
   imageSelected(imagen: any){
@@ -112,11 +131,14 @@ export class AddProductVariationsComponent implements OnInit {
   }
 
   validateFields(){
-    this.isValidImage = this.image_file ? false : true;
-    this.isValidName = this.name ? false : true;
-    this.isValidIcon = this.icon ? false : true;
+    // this.isValidImage = this.image_file ? false : true;
+    this.isValidColor = this.color ? false : true;
+    this.isValidMaterial = this.material ? false : true;
+    this.isValidSize = this.size ? false : true;
+    // this.isValidWeight = this.weight ? false : true;
+    // this.isValidQuantity = this.quantity ? false : true;
 
-    if(this.isValidImage || this.isValidName || this.isValidIcon){
+    if(this.isValidColor || this.isValidMaterial || this.isValidSize){
       return true;
     }
 

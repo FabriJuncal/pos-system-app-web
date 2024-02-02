@@ -11,6 +11,7 @@ import { TagifyModule } from 'ngx-tagify';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadMultiImageComponent } from './upload-multi-image/upload-multi-image.component';
 import { DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
+import { InfoMessageComponent } from './info-message/info-message.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -27,7 +28,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     UploadMultiImageComponent,
     TabComponent,
     TabGroupComponent,
-    TagComponent
+    TagComponent,
+    InfoMessageComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     UploadMultiImageComponent,
     TabComponent,
     TabGroupComponent,
-    TagComponent
+    TagComponent,
+    InfoMessageComponent
   ],
   providers: [
     {
