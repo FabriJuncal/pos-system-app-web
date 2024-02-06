@@ -39,3 +39,4 @@ ng generate component components/loader
 ng generate component components/single-image
 ng generate component components/multi-image
 ng generate component components/info-message
+ng generate component components/colored-circle

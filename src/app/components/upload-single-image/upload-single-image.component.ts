@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectorRef, OnInit, Output, EventEmitter } from '@angular/core';
 import { UploadSingleImage } from './upload-single-image';
-import { ImageService } from '../../services/image.service';
-import { Image } from 'src/app/interfaces/image';
+import { ImageService } from '../services/image.service';
+import { Image } from 'src/app/components/interfaces/image';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

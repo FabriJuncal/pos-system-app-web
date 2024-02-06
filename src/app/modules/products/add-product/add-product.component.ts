@@ -6,6 +6,7 @@ import { UploadMultiImage } from '../../../components/upload-multi-image/upload-
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { TagData } from 'ngx-tagify';
 import { BehaviorSubject } from 'rxjs';
+import { CategorieService } from '../../../../../../admin_ecommerce/src/app/modules/categorie/_services/categorie.service';
 
 
 @Component({
@@ -29,12 +30,13 @@ export class AddProductComponent implements OnInit  {
   tags: TagData[];
   description: string;
   summary: string;
-  state: boolean;
+  state = '1';
   image_file: any;
   image_preview: any;
   stock: number;
   categorie_id: number;
-  variety: any;
+  isPhysical = true;
+  hasVariety: boolean;
 
   text: any;
 
@@ -48,7 +50,8 @@ export class AddProductComponent implements OnInit  {
 
   constructor(
     public modal: NgbActiveModal,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _categorieService: CategorieService
   ) { }
 
   ngOnInit(): void {
@@ -109,7 +112,7 @@ export class AddProductComponent implements OnInit  {
   initComponents(){
     this.uploadSingleImageOption = {
       title: '',
-      description: 'Los clientes verán la imagen del producto en su sitio web. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg',
+      description: 'Sus clientes verán la imagen del producto en su sitio web. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg',
       pathImage: 'products',
       imagePreview: ''
     };
@@ -118,6 +121,8 @@ export class AddProductComponent implements OnInit  {
       text: 'Suelte los archivos aquí o haga clic para cargarlos.',
       countFile: 5
     }
+
+    this.getAllCategories();
   }
 
   imageSelected(imagen: any){
@@ -126,6 +131,13 @@ export class AddProductComponent implements OnInit  {
 
   tagsSelected(tags: TagData[]){
     this.tags = tags;
+  }
+
+  getAllCategories(){
+    this._categorieService.allCategories()
+    .subscribe((resp) => {
+      console.log('getAllCategories->', resp);
+    })
   }
 
 }

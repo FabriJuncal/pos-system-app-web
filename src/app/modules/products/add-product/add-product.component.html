@@ -29,8 +29,11 @@
 												<!--begin::Card header-->
 												<div class="card-header">
 													<!--begin::Card title-->
-													<div class="card-title">
-														<h2>Estado</h2> <label class="required"></label>
+													<div class="card-title container d-flex align-items-center justify-content-between">
+														<div class="d-flex">
+                              <h2>Estado</h2> <label class="required"></label>
+                            </div>
+                            <app-colored-circle color="{{ state === '1' ? '#4caf50' : '#ef5350' }}" size="25"></app-colored-circle>
 													</div>
 													<!--end::Card title-->
 													<!--begin::Card toolbar-->
@@ -44,8 +47,8 @@
 												<!--begin::Card body-->
 												<div class="card-body pt-0">
 													<!--begin::Select2-->
-													<select name="state" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Selecciona una opción" id="kt_ecommerce_add_product_status_select">
-														<option value="1" selected="selected">Publicado</option>
+													<select class="form-select mb-2" name="state" [(ngModel)]="state">
+														<option value="1">Publicado</option>
 														<option value="0">Inactivo</option>
 													</select>
 													<!--end::Select2-->
@@ -455,34 +458,38 @@
                               <!--begin::Card body-->
                               <div class="card-body pt-0">
                                 <!--begin::Input group-->
-                                <div class="fv-row">
+                                <div class="fv-row mb-2">
                                   <!--begin::Input-->
                                   <div class="form-check form-check-custom form-check-solid mb-2">
-                                    <input class="form-check-input" type="checkbox" value="1" />
+                                    <input class="form-check-input" type="checkbox" value="1" [(ngModel)]="isPhysical" name="isPhysical"/>
                                     <label class="form-check-label">Es un producto físico?</label>
                                   </div>
                                   <!--end::Input-->
                                   <!--begin::Description-->
-                                  <div class="text-muted fs-7">Establece si el producto es un artículo físico o digital. Los productos físicos pueden requerir envío.</div>
+                                  <div class="text-muted fs-7">
+                                    Establece si el producto es un artículo físico o digital. Los productos físicos pueden requerir envío.
+                                  </div>
                                   <!--end::Description-->
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="fv-row">
+                                <div class="fv-row mb-2">
                                   <!--begin::Input-->
                                   <div class="form-check form-check-custom form-check-solid mb-2">
-                                    <input class="form-check-input" type="checkbox" value="1" />
+                                    <input class="form-check-input" type="checkbox" value="1" [(ngModel)]="hasVariety" name="hasVariety"/>
                                     <label class="form-check-label">Este producto tiene variaciones?</label>
                                   </div>
                                   <!--end::Input-->
                                   <!--begin::Description-->
-                                  <div class="text-muted fs-7">Estas permiten presentar el mismo producto con diferentes atributos en una sola sección, ofreciendo una experiencia completa al público.</div>
+                                  <div class="text-muted fs-7">
+                                    Estas permiten presentar el mismo producto con diferentes atributos en una sola sección, ofreciendo una experiencia completa al público.
+                                  </div>
                                   <!--end::Description-->
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin:Attributes Product form-->
                                 <!--begin::Input group-->
-																<div class="mb-10 fv-row">
+																<div class="mb-10 mt-10 fv-row" *ngIf="!hasVariety">
 																	<!--begin::Label-->
 																	<label class="required form-label">Cantidad</label>
 																	<!--end::Label-->
@@ -499,7 +506,7 @@
 																</div>
 																<!--end::Input group-->
                                 <!--begin::Variations-->
-                                <div class="card card-flush py-4">
+                                <div class="card card-flush py-4" *ngIf="hasVariety">
                                   <!--begin::Card header-->
                                   <!-- <div class="card-header">
                                     <div class="card-title">

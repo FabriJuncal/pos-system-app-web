@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadMultiImageComponent } from './upload-multi-image/upload-multi-image.component';
 import { DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
 import { InfoMessageComponent } from './info-message/info-message.component';
+import { ColoredCircleComponent } from './colored-circle/colored-circle.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -29,7 +30,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TabComponent,
     TabGroupComponent,
     TagComponent,
-    InfoMessageComponent
+    InfoMessageComponent,
+    ColoredCircleComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TabComponent,
     TabGroupComponent,
     TagComponent,
-    InfoMessageComponent
+    InfoMessageComponent,
+    ColoredCircleComponent
   ],
   providers: [
     {

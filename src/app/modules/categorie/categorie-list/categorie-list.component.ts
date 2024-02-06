@@ -36,7 +36,6 @@ export class CategorieListComponent implements OnInit {
   allCategories(page = 1){
     this._categorieService.allCategories(page, this.search)
     .subscribe((resp) => {
-      console.log('allCategories ->', resp);
       this.categories = resp.categories.data;
       this.totalPages = resp.total;
       this.currentPage = page;
@@ -69,7 +68,6 @@ export class CategorieListComponent implements OnInit {
   }
 
   editCategorie(categorie: any){
-    console.log('categorie->', categorie);
     const modalRef = this.modelService.open(EditCategorieComponent, {centered: true, size: 'sm'});
     modalRef.componentInstance.categorie_selected = categorie;
     modalRef.result.then(

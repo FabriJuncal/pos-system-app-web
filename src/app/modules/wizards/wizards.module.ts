@@ -16,7 +16,7 @@ import { WelcomeComponent } from './steps/welcome/welcome.component';
 import { AccountTypeComponent } from './steps/account-type/account-type.component';
 import { BusinessDetailsComponent } from './steps/business-details/business-details.component';
 import { BusinessBrandingComponent } from './steps/business-branding/business-branding.component';
-import { ImageService } from '../../services/image.service';
+import { ImageService } from '../../components/services/image.service';
 
 @NgModule({
   declarations: [

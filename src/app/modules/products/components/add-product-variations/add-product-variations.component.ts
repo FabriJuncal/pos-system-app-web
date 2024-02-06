@@ -111,7 +111,7 @@ export class AddProductVariationsComponent implements OnInit {
   initComponents(){
     this.uploadSingleImageOption = {
       title: 'Imagen de la Variación:',
-      description: 'Los clientes verán la imagen de la variación en su sitio web. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg',
+      description: 'Sus clientes verán la imagen de la variación en su sitio web. Sólo se aceptan archivos de imagen *.png, *.jpg y *.jpeg',
       pathImage: 'variations',
       imagePreview: ''
     };
@@ -119,7 +119,7 @@ export class AddProductVariationsComponent implements OnInit {
     this.infoMessageOption = {
       title: 'Puntos a tener en cuenta:',
       items: [
-        'Si no agregan una imagen, se utilizará la imagen de portada para mostrar esta variación del producto.',
+        'Si no agrega una imagen, se utilizará la imagen de portada para mostrar esta variación del producto.',
         'Es obligatorio completar algunos de los siguientes campos: Color, Material, Tamaño.'
       ]
     }
