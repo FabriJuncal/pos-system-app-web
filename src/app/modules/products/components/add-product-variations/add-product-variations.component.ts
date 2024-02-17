@@ -84,7 +84,7 @@ export class AddProductVariationsComponent implements OnInit {
   save(){
 
     if(this.validateFields()){
-      this.toastr.error('DEBE COMPLETAR TODOS LOS CAMPOS');
+      this.toastr.error('DEBE COMPLETAR ALMENOS UNO DE LOS CAMPOS');
       return;
     }
 
@@ -131,14 +131,21 @@ export class AddProductVariationsComponent implements OnInit {
   }
 
   validateFields(){
+    console.log('this.color->', this.color);
+    console.log('this.material->', this.material);
+    console.log('this.size->', this.size);
     // this.isValidImage = this.image_file ? false : true;
-    this.isValidColor = this.color ? false : true;
+    this.isValidColor = this.color ? false : false;
     this.isValidMaterial = this.material ? false : true;
     this.isValidSize = this.size ? false : true;
     // this.isValidWeight = this.weight ? false : true;
     // this.isValidQuantity = this.quantity ? false : true;
 
-    if(this.isValidColor || this.isValidMaterial || this.isValidSize){
+    console.log('this.isValidColor->', this.isValidColor);
+    console.log('this.isValidMaterial->', this.isValidMaterial);
+    console.log('this.isValidSize->', this.isValidSize);
+
+    if(this.isValidColor && this.isValidMaterial && this.isValidSize){
       return true;
     }
 

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UploadSingleImage } from '../../../components/upload-single-image/upload-single-image';
 import { UploadMultiImage } from '../../../components/upload-multi-image/upload-multi-image';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { TagData } from 'ngx-tagify';
-import { BehaviorSubject } from 'rxjs';
-import { CategorieService } from '../../../../../../admin_ecommerce/src/app/modules/categorie/_services/categorie.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { CategorieService } from '../../categorie/services/categorie.service';
+import { CategorieModel } from '../../categorie/models/categorie.model';
+import { AddCategorieComponent } from '../../categorie/components/add-categorie/add-categorie.component';
 
 
 @Component({
@@ -19,7 +21,9 @@ export class AddProductComponent implements OnInit  {
   public Editor = ClassicEditor;
 
   uploadSingleImageOption: UploadSingleImage;
-  uploadMultiImageOption: UploadMultiImage
+  uploadMultiImageOption: UploadMultiImage;
+
+  categories: CategorieModel[];
 
   name: string;
   slug: string;
@@ -40,7 +44,7 @@ export class AddProductComponent implements OnInit  {
 
   text: any;
 
-  isLoading$: any;
+  isLoading$: Observable<boolean>;
 
   whitelist$ = new BehaviorSubject<TagData[]>([
     {value: '1', name: 'hello'},
@@ -51,11 +55,12 @@ export class AddProductComponent implements OnInit  {
   constructor(
     public modal: NgbActiveModal,
     private toastr: ToastrService,
-    private _categorieService: CategorieService
+    private _categorieService: CategorieService,
+    private modelService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    // this.isLoading$ = this._categorieService.isLoading$;
+    this.isLoading$ = this._categorieService.isLoading$;
     this.initComponents();
   }
 
@@ -135,9 +140,23 @@ export class AddProductComponent implements OnInit  {
 
   getAllCategories(){
     this._categorieService.allCategories()
-    .subscribe((resp) => {
-      console.log('getAllCategories->', resp);
-    })
+    .subscribe((resp) => this.categories = resp.categories.data)
+  }
+
+  addCategorie(){
+    const modalRef = this.modelService.open(AddCategorieComponent, {centered: true, size: 'sm'});
+    modalRef.result.then(
+      () => {
+
+      },
+      () => {
+
+      }
+    )
+    // Refrezca la lista luego de agregar una Categoría
+    modalRef.componentInstance.categoriesE.subscribe((resp:any) => {
+      this.categories.unshift(resp);
+    });
   }
 
 }

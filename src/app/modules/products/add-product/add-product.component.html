@@ -1,548 +1,554 @@
-							<!--begin::Content-->
-							<div id="kt_app_content" class="app-content flex-column-fluid">
-								<!--begin::Content container-->
-								<div id="kt_app_content_container" class="app-container container-xxl">
-									<!--begin::Form-->
-									<form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
-										<!--begin::Aside column-->
-										<div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
-											<!--begin::Thumbnail settings-->
-											<div class="card card-flush py-4">
-												<!--begin::Card header-->
-												<div class="card-header">
-													<!--begin::Card title-->
-													<div class="card-title">
-														<h2>Imagen de Portada</h2>
-													</div>
-													<!--end::Card title-->
-												</div>
-												<!--end::Card header-->
-												<!--begin::Card body-->
-												<div class="card-body text-center pt-0">
-                          <app-upload-single-image [options]="uploadSingleImageOption" (imageSelected)="imageSelected($event)"></app-upload-single-image>
-												</div>
-												<!--end::Card body-->
-											</div>
-											<!--end::Thumbnail settings-->
-											<!--begin::Status-->
-											<div class="card card-flush py-4">
-												<!--begin::Card header-->
-												<div class="card-header">
-													<!--begin::Card title-->
-													<div class="card-title container d-flex align-items-center justify-content-between">
-														<div class="d-flex">
-                              <h2>Estado</h2> <label class="required"></label>
-                            </div>
-                            <app-colored-circle color="{{ state === '1' ? '#4caf50' : '#ef5350' }}" size="25"></app-colored-circle>
-													</div>
-													<!--end::Card title-->
-													<!--begin::Card toolbar-->
-                          <!-- Muestra el color verde "Publicado", se debería hacer dinamico y cuando se seleccione "Inactivo" este cambie a color Rojo" -->
-													<!-- <div class="card-toolbar">
-														<div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
-													</div> -->
-													<!--begin::Card toolbar-->
-												</div>
-												<!--end::Card header-->
-												<!--begin::Card body-->
-												<div class="card-body pt-0">
-													<!--begin::Select2-->
-													<select class="form-select mb-2" name="state" [(ngModel)]="state">
-														<option value="1">Publicado</option>
-														<option value="0">Inactivo</option>
-													</select>
-													<!--end::Select2-->
-													<!--begin::Description-->
-													<div class="text-muted fs-7">Establecer el estado del producto.</div>
-													<!--end::Description-->
-													<!--begin::Datepicker-->
-													<!-- <div class="mt-10">
-														<label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Selecciona fecha y hora de publicación</label>
-														<input class="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date & time" />
-													</div> -->
-													<!--end::Datepicker-->
-												</div>
-												<!--end::Card body-->
-											</div>
-											<!--end::Status-->
-											<!--begin::Category & tags-->
-											<div class="card card-flush py-4">
-												<!--begin::Card header-->
-												<div class="card-header">
-													<!--begin::Card title-->
-													<div class="card-title">
-														<h2>Detalles de producto</h2>
-													</div>
-													<!--end::Card title-->
-												</div>
-												<!--end::Card header-->
-												<!--begin::Card body-->
-												<div class="card-body pt-0">
-													<!--begin::Input group-->
-													<!--begin::Label-->
-													<label class="form-label required">Categoría</label>
-													<!--end::Label-->
-													<!--begin::Select2-->
-													<!-- <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
-														<option></option>
-														<option value="Computers">Computers</option>
-													</select> -->
-                          <select
-                          class="form-control form-select mb-2"
-                          name="categorie_id"
-                          placeholder="Seleccione una categoría">
-                            <option value="">-Seleccione una opción-</option>
-                          </select>
-													<!--end::Select2-->
-													<!--begin::Description-->
-													<div class="text-muted fs-7 mb-7">Agregar producto a una categoría.</div>
-													<!--end::Description-->
-													<!--end::Input group-->
-													<!--begin::Button-->
-													<a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" class="btn btn-light-primary btn-sm mb-10">
-													<i class="ki-duotone ki-plus fs-2"></i>Crear nueva categoría</a>
-													<!--end::Button-->
-                          <!--begin::Label-->
-                          <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
-                            <span>Etiquetas</span>
-                            <!-- <span class="ms-1" data-bs-toggle="tooltip" title="Specify a target priorty">
-                              <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                              </i>
-                            </span> -->
-                          </label>
-                          <!--end::Label-->
-                          <!--begin::Input-->
-                          <p>
-                            <app-tag [whitelist]="whitelist$" (tagsSelected)="tagsSelected($event)"></app-tag>
-                          </p>
-                          <!--end::Input-->
-                          <!--begin::Description-->
-													<div class="text-muted fs-7">Agregar etiquetas a un producto.</div>
-													<!--end::Description-->
-												</div>
-												<!--end::Card body-->
-											</div>
-											<!--end::Category & tags-->
-											<!--begin::Weekly sales-->
-											<div class="card card-flush py-4">
-												<!--begin::Card header-->
-												<div class="card-header">
-													<!--begin::Card title-->
-													<div class="card-title">
-														<h2>Ventas Semanales</h2>
-													</div>
-													<!--end::Card title-->
-												</div>
-												<!--end::Card header-->
-												<!--begin::Card body-->
-												<div class="card-body pt-0">
-													<span class="text-muted">Datos no disponibles. Los datos de ventas comenzarán a capturarse una vez que se haya publicado el producto.</span>
-												</div>
-												<!--end::Card body-->
-											</div>
-											<!--end::Weekly sales-->
-											<!--begin::Template settings-->
-											<!--end::Template settings-->
-										</div>
-										<!--end::Aside column-->
-										<!--begin::Main column-->
-										<div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
-                      <app-tab-group>
-                        <app-tab title="General">
-													<div class="d-flex flex-column gap-7 gap-lg-10">
-														<!--begin::General options-->
-														<div class="card card-flush py-4">
-															<!--begin::Card header-->
-															<div class="card-header">
-																<div class="card-title">
-																	<h2>General</h2>
-																</div>
-															</div>
-															<!--end::Card header-->
-															<!--begin::Card body-->
-															<div class="card-body pt-0">
-																<!--begin::Input group-->
-																<div class="mb-10 fv-row">
-																	<!--begin::Label-->
-																	<label name="title" class="required form-label">Nombre del Producto:</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-																	<input type="text" name="name" class="form-control mb-2" placeholder="Introduce el nombre del producto" value="" autocomplete="off"/>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Se requiere y se recomienda que un nombre de producto sea único.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-                                																<!--begin::Input group-->
-																<div class="mb-10 fv-row">
-																	<!--begin::Label-->
-																	<label class="required form-label">Resumen del Producto:</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-                                  <textarea name="summary" class="form-control mb-2" placeholder="Breve resumen que destaque los beneficios clave" rows="4"></textarea>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Incluye palabras clave que identifiquen rápidamente la utilidad del producto.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-																<!--begin::Input group-->
-																<div>
-																	<!--begin::Label-->
-																	<label class="form-label">Descripción del Producto:</label>
-                                  <!--  USAR EL COMPONENTE: https://ckeditor.com/docs/ckeditor5/latest/installation/integrations/angular.html -->
-																	<!--end::Label-->
-																	<!--begin::Editor-->
-                                  <ckeditor name="description" [editor]="Editor"></ckeditor>
-																	<!--end::Editor-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Establezca una descripción del producto para una mejor visibilidad.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-															</div>
-															<!--end::Card header-->
-														</div>
-														<!--end::General options-->
-														<!--begin::Media-->
+<ng-container *ngIf="isLoading$ | async">
+  <app-loader></app-loader>
+</ng-container>
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+  <!--begin::Content container-->
+  <div id="kt_app_content_container" class="app-container container-xxl">
+    <!--begin::Form-->
+    <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
+      <!--begin::Aside column-->
+      <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+        <!--begin::Thumbnail settings-->
+        <div class="card card-flush py-4">
+          <!--begin::Card header-->
+          <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <h2>Imagen de Portada</h2>
+            </div>
+            <!--end::Card title-->
+          </div>
+          <!--end::Card header-->
+          <!--begin::Card body-->
+          <div class="card-body text-center pt-0">
+            <app-upload-single-image [options]="uploadSingleImageOption" (imageSelected)="imageSelected($event)"></app-upload-single-image>
+          </div>
+          <!--end::Card body-->
+        </div>
+        <!--end::Thumbnail settings-->
+        <!--begin::Status-->
+        <div class="card card-flush py-4">
+          <!--begin::Card header-->
+          <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title container d-flex align-items-center justify-content-between">
+              <div class="d-flex">
+                <h2>Estado</h2> <label class="required"></label>
+              </div>
+              <app-colored-circle color="{{ state === '1' ? '#4caf50' : '#ef5350' }}" size="25"></app-colored-circle>
+            </div>
+            <!--end::Card title-->
+            <!--begin::Card toolbar-->
+            <!-- Muestra el color verde "Publicado", se debería hacer dinamico y cuando se seleccione "Inactivo" este cambie a color Rojo" -->
+            <!-- <div class="card-toolbar">
+              <div class="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"></div>
+            </div> -->
+            <!--begin::Card toolbar-->
+          </div>
+          <!--end::Card header-->
+          <!--begin::Card body-->
+          <div class="card-body pt-0">
+            <!--begin::Select2-->
+            <select class="form-select mb-2" name="state" [(ngModel)]="state">
+              <option value="1">Publicado</option>
+              <option value="0">Inactivo</option>
+            </select>
+            <!--end::Select2-->
+            <!--begin::Description-->
+            <div class="text-muted fs-7">Establecer el estado del producto.</div>
+            <!--end::Description-->
+            <!--begin::Datepicker-->
+            <!-- <div class="mt-10">
+              <label for="kt_ecommerce_add_product_status_datepicker" class="form-label">Selecciona fecha y hora de publicación</label>
+              <input class="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date & time" />
+            </div> -->
+            <!--end::Datepicker-->
+          </div>
+          <!--end::Card body-->
+        </div>
+        <!--end::Status-->
+        <!--begin::Category & tags-->
+        <div class="card card-flush py-4">
+          <!--begin::Card header-->
+          <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <h2>Detalles de producto</h2>
+            </div>
+            <!--end::Card title-->
+          </div>
+          <!--end::Card header-->
+          <!--begin::Card body-->
+          <div class="card-body pt-0">
+            <!--begin::Input group-->
+            <!--begin::Label-->
+            <label class="form-label required">Categoría</label>
+            <!--end::Label-->
+            <!--begin::Select2-->
+            <!-- <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
+              <option></option>
+              <option value="Computers">Computers</option>
+            </select> -->
+            <select
+            class="form-control form-select mb-2"
+            name="categorie_id"
+            placeholder="Seleccione una categoría">
+              <option value="">-Seleccione una opción-</option>
+              <option *ngFor="let categorie of categories" [value]="categorie.id">
+                {{ categorie.name }}
+              </option>
+            </select>
+            <!--end::Select2-->
+            <!--begin::Description-->
+            <div class="text-muted fs-7 mb-7">Agregar producto a una categoría.</div>
+            <!--end::Description-->
+            <!--end::Input group-->
+            <!--begin::Button-->
+            <a class="btn btn-light-primary btn-sm mb-10" (click)="addCategorie()">
+            <i class="ki-duotone ki-plus fs-2"></i>Crear nueva categoría</a>
+            <!--end::Button-->
+            <!--begin::Label-->
+            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+              <span>Etiquetas</span>
+              <!-- <span class="ms-1" data-bs-toggle="tooltip" title="Specify a target priorty">
+                <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                  <span class="path3"></span>
+                </i>
+              </span> -->
+            </label>
+            <!--end::Label-->
+            <!--begin::Input-->
+            <p>
+              <app-tag [whitelist]="whitelist$" (tagsSelected)="tagsSelected($event)"></app-tag>
+            </p>
+            <!--end::Input-->
+            <!--begin::Description-->
+            <div class="text-muted fs-7">Agregar etiquetas a un producto.</div>
+            <!--end::Description-->
+          </div>
+          <!--end::Card body-->
+        </div>
+        <!--end::Category & tags-->
+        <!--begin::Weekly sales-->
+        <div class="card card-flush py-4">
+          <!--begin::Card header-->
+          <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <h2>Ventas Semanales</h2>
+            </div>
+            <!--end::Card title-->
+          </div>
+          <!--end::Card header-->
+          <!--begin::Card body-->
+          <div class="card-body pt-0">
+            <span class="text-muted">Datos no disponibles. Los datos de ventas comenzarán a capturarse una vez que se haya publicado el producto.</span>
+          </div>
+          <!--end::Card body-->
+        </div>
+        <!--end::Weekly sales-->
+        <!--begin::Template settings-->
+        <!--end::Template settings-->
+      </div>
+      <!--end::Aside column-->
+      <!--begin::Main column-->
+      <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+        <app-tab-group>
+          <app-tab title="General">
+            <div class="d-flex flex-column gap-7 gap-lg-10">
+              <!--begin::General options-->
+              <div class="card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                  <div class="card-title">
+                    <h2>General</h2>
+                  </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                  <!--begin::Input group-->
+                  <div class="mb-10 fv-row">
+                    <!--begin::Label-->
+                    <label name="title" class="required form-label">Nombre del Producto:</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" name="name" class="form-control mb-2" placeholder="Introduce el nombre del producto" value="" autocomplete="off"/>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Se requiere y se recomienda que un nombre de producto sea único.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                                                  <!--begin::Input group-->
+                  <div class="mb-10 fv-row">
+                    <!--begin::Label-->
+                    <label class="required form-label">Resumen del Producto:</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <textarea name="summary" class="form-control mb-2" placeholder="Breve resumen que destaque los beneficios clave" rows="4"></textarea>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Incluye palabras clave que identifiquen rápidamente la utilidad del producto.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                  <!--begin::Input group-->
+                  <div>
+                    <!--begin::Label-->
+                    <label class="form-label">Descripción del Producto:</label>
+                    <!--  USAR EL COMPONENTE: https://ckeditor.com/docs/ckeditor5/latest/installation/integrations/angular.html -->
+                    <!--end::Label-->
+                    <!--begin::Editor-->
+                    <ckeditor name="description" [editor]="Editor"></ckeditor>
+                    <!--end::Editor-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Establezca una descripción del producto para una mejor visibilidad.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                </div>
+                <!--end::Card header-->
+              </div>
+              <!--end::General options-->
+              <!--begin::Media-->
 
-                            <!-- LEER!!! Se oculta este apartado hasta que se haga la implementación -->
+              <!-- LEER!!! Se oculta este apartado hasta que se haga la implementación -->
 
-                            <div class="d-none card card-flush py-4">
-															<!--begin::Card header-->
-															<div class="card-header">
-																<div class="card-title">
-																	<h2>Media</h2>
-																</div>
-															</div>
-															<!--end::Card header-->
-															<!--begin::Card body-->
-															<div class="card-body pt-0">
-																<!--begin::Input group-->
-																<div class="fv-row mb-2">
-																	<!--begin::Dropzone-->
-																	<div class="dropzone" id="kt_ecommerce_add_product_media">
-																		<!--begin::Message-->
-																		<div class="dz-message needsclick">
-																			<!--begin::Icon-->
-																			<i class="ki-duotone ki-file-up text-primary fs-3x">
-																				<span class="path1"></span>
-																				<span class="path2"></span>
-																			</i>
-																			<!--end::Icon-->
-																			<!--begin::Info-->
-																			<div class="ms-4">
-																				<h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
-																				<span class="fs-7 fw-semibold text-gray-400">Sube hasta 10 archivos</span>
-																			</div>
-																			<!--end::Info-->
-																		</div>
-																	</div>
-																	<!--end::Dropzone-->
-																</div>
-																<!--end::Input group-->
-																<!--begin::Description-->
-																<div class="text-muted fs-7">Configure la galería de medios del producto.</div>
-																<!--end::Description-->
-															</div>
-															<!--end::Card header-->
-														</div>
-														<!--end::Media-->
-														<!--begin::Pricing-->
-														<div class="card card-flush py-4">
-															<!--begin::Card header-->
-															<div class="card-header">
-																<div class="card-title">
-																	<h2>Precio</h2>
-																</div>
-															</div>
-															<!--end::Card header-->
-															<!--begin::Card body-->
-															<div class="card-body pt-0">
-																<!--begin::Input group-->
-																<div class="mb-10 fv-row">
-																	<!--begin::Label-->
-																	<label class="required form-label">Precio de costo</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-																	<input type="text" name="price_cost" class="form-control mb-2" placeholder="Costo de adquisición del producto" value="" autocomplete="off"/>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Establecer el precio de costo del producto.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-                                																<!--begin::Input group-->
-																<div class="mb-10 fv-row">
-																	<!--begin::Label-->
-																	<label class="required form-label">Precio de Venta</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-																	<input type="text" name="price_sale" class="form-control mb-2" placeholder="Precio de venta para el producto" value="" autocomplete="off"/>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Establecer el precio de venta del producto.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-															</div>
-															<!--end::Card header-->
-														</div>
-														<!--end::Pricing-->
-                            <!--begin::Preview Images-->
-														<div class="card card-flush py-4">
-															<!--begin::Card header-->
-															<div class="card-header">
-																<div class="card-title">
-																	<h2>Vista Previa</h2>
-																</div>
-															</div>
-															<!--end::Card header-->
-															<!--begin::Card body-->
-															<div class="card-body pt-0">
-																<!--begin::Input group-->
-																<div class="mb-10 fv-row">
-																	<!--begin::Label-->
-																	<label class="form-label">Imagenes del Producto:</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-                                  <app-upload-multi-image [options]="uploadMultiImageOption"></app-upload-multi-image>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Asegúrate que las imagenes sean de buena calidad y con fondo blanco para captar a tu publico.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-															</div>
-															<!--end::Card header-->
-														</div>
-														<!--end::Preview Images-->
-													</div>
-                        </app-tab>
-                        <app-tab title="Avanzado">
-													<div class="d-flex flex-column gap-7 gap-lg-10">
-														<!--begin::Inventory-->
-														<div class="card card-flush py-4">
-															<!--begin::Card header-->
-															<div class="card-header">
-																<div class="card-title">
-																	<h2>Inventario</h2>
-																</div>
-															</div>
-															<!--end::Card header-->
-															<!--begin::Card body-->
-															<div class="card-body pt-0">
-																<!--begin::Input group-->
-																<div class="mb-10 fv-row">
-																	<!--begin::Label-->
-																	<label class="required form-label">SKU</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-																	<input type="text" name="sku" class="form-control mb-2" placeholder="SW3000-001" value="" autocomplete="off"/>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Ingresa el código de barras del producto.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-																<!--begin::Input group-->
-																<div class="mb-10 fv-row">
-																	<!--begin::Label-->
-																	<label class="required form-label">Código de Barras</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-																	<input type="text" name="barcdode" class="form-control mb-2" placeholder="123456789012" value="" autocomplete="off"/>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Ingresa el código de barras del producto.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-																<!--begin::Input group-->
-																<div class="fv-row">
-																	<!--begin::Label-->
-																	<!-- <label class="form-label">Permitir pedidos pendientes</label> -->
-																	<!--end::Label-->
-																	<!--begin::Input-->
-																	<!-- <div class="form-check form-check-custom form-check-solid mb-2">
-																		<input class="form-check-input" type="checkbox" value="" />
-																		<label class="form-check-label">Si</label>
-																	</div> -->
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<!-- <div class="text-muted fs-7">Permitir a los clientes comprar productos que están agotados.</div> -->
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-															</div>
-															<!--end::Card header-->
-														</div>
-														<!--end::Inventory-->
-														<!--begin::Shipping-->
-														<!-- <div class="card card-flush py-4"> -->
-															<!--begin::Card header-->
-															<!-- <div class="card-header">
-																<div class="card-title">
-																	<h2>Envío</h2>
-																</div>
-															</div> -->
-															<!--end::Card header-->
-															<!--begin::Card body-->
-															<!-- <div class="card-body pt-0"> -->
-																<!--begin::Input group-->
-																<!-- <div class="fv-row"> -->
-																	<!--begin::Input-->
-																	<!-- <div class="form-check form-check-custom form-check-solid mb-2">
-																		<input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" autocomplete="off"/>
-																		<label class="form-check-label">Este es un producto físico.</label>
-																	</div> -->
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<!-- <div class="text-muted fs-7">Establece si el producto es un artículo físico o digital. Los productos físicos pueden requerir envío.</div> -->
-																	<!--end::Description-->
-																<!-- </div> -->
-																<!--end::Input group-->
-																<!--begin::Shipping form-->
-																<!-- <div id="kt_ecommerce_add_product_shipping" class="d-none mt-10"> -->
-																	<!--begin::Input group-->
-																	<!-- <div class="mb-10 fv-row"> -->
-																		<!--begin::Label-->
-																		<!-- <label class="form-label">Peso</label> -->
-																		<!--end::Label-->
-																		<!--begin::Editor-->
-																		<!-- <input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="" autocomplete="off"/> -->
-																		<!--end::Editor-->
-																		<!--begin::Description-->
-																		<!-- <div class="text-muted fs-7">Establezca un peso del producto en kilogramos (kg).</div> -->
-																		<!--end::Description-->
-																	<!-- </div> -->
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<!-- <div class="fv-row"> -->
-																		<!--begin::Label-->
-																		<!-- <label class="form-label">Dimensión</label> -->
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<!-- <div class="d-flex flex-wrap flex-sm-nowrap gap-3">
-																			<input type="number" name="width" class="form-control mb-2" placeholder="Ancho (AN)" value="" autocomplete="off"/>
-																			<input type="number" name="height" class="form-control mb-2" placeholder="Altura (AL)" value="" autocomplete="off"/>
-																			<input type="number" name="length" class="form-control mb-2" placeholder="Longitud (lO)" value="" autocomplete="off"/>
-																		</div> -->
-																		<!--end::Input-->
-																		<!--begin::Description-->
-																		<!-- <div class="text-muted fs-7">Ingrese las dimensiones del producto en centímetros (cm).</div> -->
-																		<!--end::Description-->
-																	<!-- </div> -->
-																	<!--end::Input group-->
-																<!-- </div> -->
-																<!--end::Shipping form-->
-															<!-- </div> -->
-															<!--end::Card header-->
-														<!-- </div> -->
-														<!--end::Shipping-->
-													</div>
-                          <div class="d-flex flex-column gap-7 gap-lg-10">
-                            <!--begin:Attributes Product-->
-                            <div class="card card-flush py-4">
-                              <!--begin::Card header-->
-                              <div class="card-header">
-                                <div class="card-title">
-                                  <h2>Atributos del Producto</h2>
-                                </div>
-                              </div>
-                              <!--end::Card header-->
-                              <!--begin::Card body-->
-                              <div class="card-body pt-0">
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-2">
-                                  <!--begin::Input-->
-                                  <div class="form-check form-check-custom form-check-solid mb-2">
-                                    <input class="form-check-input" type="checkbox" value="1" [(ngModel)]="isPhysical" name="isPhysical"/>
-                                    <label class="form-check-label">Es un producto físico?</label>
-                                  </div>
-                                  <!--end::Input-->
-                                  <!--begin::Description-->
-                                  <div class="text-muted fs-7">
-                                    Establece si el producto es un artículo físico o digital. Los productos físicos pueden requerir envío.
-                                  </div>
-                                  <!--end::Description-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-2">
-                                  <!--begin::Input-->
-                                  <div class="form-check form-check-custom form-check-solid mb-2">
-                                    <input class="form-check-input" type="checkbox" value="1" [(ngModel)]="hasVariety" name="hasVariety"/>
-                                    <label class="form-check-label">Este producto tiene variaciones?</label>
-                                  </div>
-                                  <!--end::Input-->
-                                  <!--begin::Description-->
-                                  <div class="text-muted fs-7">
-                                    Estas permiten presentar el mismo producto con diferentes atributos en una sola sección, ofreciendo una experiencia completa al público.
-                                  </div>
-                                  <!--end::Description-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin:Attributes Product form-->
-                                <!--begin::Input group-->
-																<div class="mb-10 mt-10 fv-row" *ngIf="!hasVariety">
-																	<!--begin::Label-->
-																	<label class="required form-label">Cantidad</label>
-																	<!--end::Label-->
-																	<!--begin::Input-->
-																	<div class="d-flex gap-3">
-																		<!-- <input type="number" name="shelf" class="form-control mb-2" placeholder="En el estante" value="" />
-																		<input type="number" name="warehouse" class="form-control mb-2" placeholder="En Almacén" /> -->
-                                    <input type="number" name="stock" class="form-control mb-2" placeholder="Ingrese la cantidad de productos que tendrá en stock" autocomplete="off"/>
-																	</div>
-																	<!--end::Input-->
-																	<!--begin::Description-->
-																	<div class="text-muted fs-7">Cantidad disponible en inventario.</div>
-																	<!--end::Description-->
-																</div>
-																<!--end::Input group-->
-                                <!--begin::Variations-->
-                                <div class="card card-flush py-4" *ngIf="hasVariety">
-                                  <!--begin::Card header-->
-                                  <!-- <div class="card-header">
-                                    <div class="card-title">
-                                      <h2>Variaciones</h2>
-                                    </div>
-                                  </div> -->
-                                  <!--end::Card header-->
-                                  <!--begin::Card body-->
-                                  <div class="card-body pt-0">
-                                    <!--begin::Input group-->
-                                    <div class="" data-kt-ecommerce-catalog-add-product="auto-options">
-                                      <!--begin::Label-->
-                                      <!-- <label class="form-label">Variaciones de productos</label> -->
-                                      <!--end::Label-->
-                                      <!--begin::table-->
-                                      <app-list-product-variations></app-list-product-variations>
-                                      <!--end::table-->
-                                    </div>
-                                    <!--end::Input group-->
-                                  </div>
-                                  <!--end::Card header-->
-                                </div>
-                                <!--end::Variations-->
-                                <!--end:Attributes Product form-->
-                              </div>
-                              <!--end::Card header-->
-                            </div>
-                            <!--end:Attributes Product-->
-													</div>
-                        </app-tab>
-                      </app-tab-group>
-										</div>
-										<!--end::Main column-->
-									</form>
-									<!--end::Form-->
-								</div>
-								<!--end::Content container-->
-							</div>
-							<!--end::Content-->
+              <div class="d-none card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                  <div class="card-title">
+                    <h2>Media</h2>
+                  </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                  <!--begin::Input group-->
+                  <div class="fv-row mb-2">
+                    <!--begin::Dropzone-->
+                    <div class="dropzone" id="kt_ecommerce_add_product_media">
+                      <!--begin::Message-->
+                      <div class="dz-message needsclick">
+                        <!--begin::Icon-->
+                        <i class="ki-duotone ki-file-up text-primary fs-3x">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        <!--end::Icon-->
+                        <!--begin::Info-->
+                        <div class="ms-4">
+                          <h3 class="fs-5 fw-bold text-gray-900 mb-1">Suelte los archivos aquí o haga clic para cargarlos.</h3>
+                          <span class="fs-7 fw-semibold text-gray-400">Sube hasta 10 archivos</span>
+                        </div>
+                        <!--end::Info-->
+                      </div>
+                    </div>
+                    <!--end::Dropzone-->
+                  </div>
+                  <!--end::Input group-->
+                  <!--begin::Description-->
+                  <div class="text-muted fs-7">Configure la galería de medios del producto.</div>
+                  <!--end::Description-->
+                </div>
+                <!--end::Card header-->
+              </div>
+              <!--end::Media-->
+              <!--begin::Pricing-->
+              <div class="card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                  <div class="card-title">
+                    <h2>Precio</h2>
+                  </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                  <!--begin::Input group-->
+                  <div class="mb-10 fv-row">
+                    <!--begin::Label-->
+                    <label class="required form-label">Precio de costo</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" name="price_cost" class="form-control mb-2" placeholder="Costo de adquisición del producto" value="" autocomplete="off"/>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Establecer el precio de costo del producto.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                                                  <!--begin::Input group-->
+                  <div class="mb-10 fv-row">
+                    <!--begin::Label-->
+                    <label class="required form-label">Precio de Venta</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" name="price_sale" class="form-control mb-2" placeholder="Precio de venta para el producto" value="" autocomplete="off"/>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Establecer el precio de venta del producto.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                </div>
+                <!--end::Card header-->
+              </div>
+              <!--end::Pricing-->
+              <!--begin::Preview Images-->
+              <div class="card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                  <div class="card-title">
+                    <h2>Vista Previa</h2>
+                  </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                  <!--begin::Input group-->
+                  <div class="mb-10 fv-row">
+                    <!--begin::Label-->
+                    <label class="form-label">Imagenes del Producto:</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <app-upload-multi-image [options]="uploadMultiImageOption"></app-upload-multi-image>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Asegúrate que las imagenes sean de buena calidad y con fondo blanco para captar a tu publico.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                </div>
+                <!--end::Card header-->
+              </div>
+              <!--end::Preview Images-->
+            </div>
+          </app-tab>
+          <app-tab title="Avanzado">
+            <div class="d-flex flex-column gap-7 gap-lg-10">
+              <!--begin::Inventory-->
+              <div class="card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                  <div class="card-title">
+                    <h2>Inventario</h2>
+                  </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                  <!--begin::Input group-->
+                  <div class="mb-10 fv-row">
+                    <!--begin::Label-->
+                    <label class="required form-label">SKU</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" name="sku" class="form-control mb-2" placeholder="SW3000-001" value="" autocomplete="off"/>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Ingresa el código de barras del producto.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                  <!--begin::Input group-->
+                  <div class="mb-10 fv-row">
+                    <!--begin::Label-->
+                    <label class="required form-label">Código de Barras</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" name="barcdode" class="form-control mb-2" placeholder="123456789012" value="" autocomplete="off"/>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Ingresa el código de barras del producto.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                  <!--begin::Input group-->
+                  <div class="fv-row">
+                    <!--begin::Label-->
+                    <!-- <label class="form-label">Permitir pedidos pendientes</label> -->
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <!-- <div class="form-check form-check-custom form-check-solid mb-2">
+                      <input class="form-check-input" type="checkbox" value="" />
+                      <label class="form-check-label">Si</label>
+                    </div> -->
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <!-- <div class="text-muted fs-7">Permitir a los clientes comprar productos que están agotados.</div> -->
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                </div>
+                <!--end::Card header-->
+              </div>
+              <!--end::Inventory-->
+              <!--begin::Shipping-->
+              <!-- <div class="card card-flush py-4"> -->
+                <!--begin::Card header-->
+                <!-- <div class="card-header">
+                  <div class="card-title">
+                    <h2>Envío</h2>
+                  </div>
+                </div> -->
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <!-- <div class="card-body pt-0"> -->
+                  <!--begin::Input group-->
+                  <!-- <div class="fv-row"> -->
+                    <!--begin::Input-->
+                    <!-- <div class="form-check form-check-custom form-check-solid mb-2">
+                      <input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" autocomplete="off"/>
+                      <label class="form-check-label">Este es un producto físico.</label>
+                    </div> -->
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <!-- <div class="text-muted fs-7">Establece si el producto es un artículo físico o digital. Los productos físicos pueden requerir envío.</div> -->
+                    <!--end::Description-->
+                  <!-- </div> -->
+                  <!--end::Input group-->
+                  <!--begin::Shipping form-->
+                  <!-- <div id="kt_ecommerce_add_product_shipping" class="d-none mt-10"> -->
+                    <!--begin::Input group-->
+                    <!-- <div class="mb-10 fv-row"> -->
+                      <!--begin::Label-->
+                      <!-- <label class="form-label">Peso</label> -->
+                      <!--end::Label-->
+                      <!--begin::Editor-->
+                      <!-- <input type="text" name="weight" class="form-control mb-2" placeholder="Product weight" value="" autocomplete="off"/> -->
+                      <!--end::Editor-->
+                      <!--begin::Description-->
+                      <!-- <div class="text-muted fs-7">Establezca un peso del producto en kilogramos (kg).</div> -->
+                      <!--end::Description-->
+                    <!-- </div> -->
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <!-- <div class="fv-row"> -->
+                      <!--begin::Label-->
+                      <!-- <label class="form-label">Dimensión</label> -->
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <!-- <div class="d-flex flex-wrap flex-sm-nowrap gap-3">
+                        <input type="number" name="width" class="form-control mb-2" placeholder="Ancho (AN)" value="" autocomplete="off"/>
+                        <input type="number" name="height" class="form-control mb-2" placeholder="Altura (AL)" value="" autocomplete="off"/>
+                        <input type="number" name="length" class="form-control mb-2" placeholder="Longitud (lO)" value="" autocomplete="off"/>
+                      </div> -->
+                      <!--end::Input-->
+                      <!--begin::Description-->
+                      <!-- <div class="text-muted fs-7">Ingrese las dimensiones del producto en centímetros (cm).</div> -->
+                      <!--end::Description-->
+                    <!-- </div> -->
+                    <!--end::Input group-->
+                  <!-- </div> -->
+                  <!--end::Shipping form-->
+                <!-- </div> -->
+                <!--end::Card header-->
+              <!-- </div> -->
+              <!--end::Shipping-->
+            </div>
+            <div class="d-flex flex-column gap-7 gap-lg-10">
+              <!--begin:Attributes Product-->
+              <div class="card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                  <div class="card-title">
+                    <h2>Atributos del Producto</h2>
+                  </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                  <!--begin::Input group-->
+                  <div class="fv-row mb-2">
+                    <!--begin::Input-->
+                    <div class="form-check form-check-custom form-check-solid mb-2">
+                      <input class="form-check-input" type="checkbox" value="1" [(ngModel)]="isPhysical" name="isPhysical"/>
+                      <label class="form-check-label">Es un producto físico?</label>
+                    </div>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">
+                      Establece si el producto es un artículo físico o digital. Los productos físicos pueden requerir envío.
+                    </div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                  <!--begin::Input group-->
+                  <div class="fv-row mb-2">
+                    <!--begin::Input-->
+                    <div class="form-check form-check-custom form-check-solid mb-2">
+                      <input class="form-check-input" type="checkbox" value="1" [(ngModel)]="hasVariety" name="hasVariety"/>
+                      <label class="form-check-label">Este producto tiene variaciones?</label>
+                    </div>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">
+                      Estas permiten presentar el mismo producto con diferentes atributos en una sola sección, ofreciendo una experiencia completa al público.
+                    </div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                  <!--begin:Attributes Product form-->
+                  <!--begin::Input group-->
+                  <div class="mb-10 mt-10 fv-row" *ngIf="!hasVariety">
+                    <!--begin::Label-->
+                    <label class="required form-label">Cantidad</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <div class="d-flex gap-3">
+                      <!-- <input type="number" name="shelf" class="form-control mb-2" placeholder="En el estante" value="" />
+                      <input type="number" name="warehouse" class="form-control mb-2" placeholder="En Almacén" /> -->
+                      <input type="number" name="stock" class="form-control mb-2" placeholder="Ingrese la cantidad de productos que tendrá en stock" autocomplete="off"/>
+                    </div>
+                    <!--end::Input-->
+                    <!--begin::Description-->
+                    <div class="text-muted fs-7">Cantidad disponible en inventario.</div>
+                    <!--end::Description-->
+                  </div>
+                  <!--end::Input group-->
+                  <!--begin::Variations-->
+                  <div class="card card-flush py-4" *ngIf="hasVariety">
+                    <!--begin::Card header-->
+                    <!-- <div class="card-header">
+                      <div class="card-title">
+                        <h2>Variaciones</h2>
+                      </div>
+                    </div> -->
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body pt-0">
+                      <!--begin::Input group-->
+                      <div class="" data-kt-ecommerce-catalog-add-product="auto-options">
+                        <!--begin::Label-->
+                        <!-- <label class="form-label">Variaciones de productos</label> -->
+                        <!--end::Label-->
+                        <!--begin::table-->
+                        <app-list-product-variations></app-list-product-variations>
+                        <!--end::table-->
+                      </div>
+                      <!--end::Input group-->
+                    </div>
+                    <!--end::Card header-->
+                  </div>
+                  <!--end::Variations-->
+                  <!--end:Attributes Product form-->
+                </div>
+                <!--end::Card header-->
+              </div>
+              <!--end:Attributes Product-->
+            </div>
+          </app-tab>
+        </app-tab-group>
+      </div>
+      <!--end::Main column-->
+    </form>
+    <!--end::Form-->
+  </div>
+  <!--end::Content container-->
+</div>
+<!--end::Content-->
