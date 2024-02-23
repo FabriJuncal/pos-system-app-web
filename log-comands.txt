@@ -1,3 +1,13 @@
+ng generate module modules/roles --routing
+ng generate component modules/roles
+ng generate service modules/roles/services/roles
+ng generate component modules/roles/roles-list
+ng generate component modules/roles/components/add-roles
+ng generate component modules/roles/components/edit-roles
+ng generate component modules/roles/components/delete-roles
+ng generate class modules/roles/models/roles.model
+
+
 ng generate module modules/users --routing
 ng generate component modules/users
 ng generate service modules/users/services/users

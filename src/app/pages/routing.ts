@@ -12,6 +12,12 @@ const Routing: Routes = [
       import('./builder/builder.module').then((m) => m.BuilderModule),
   },
   {
+    path: 'roles',
+    loadChildren: () =>
+      import('../modules/roles/roles.module').then((m) => m.RolesModule),
+    // data: { layout: 'light-sidebar' }, // Agrega el tema light al módulo
+  },
+  {
     path: 'users',
     loadChildren: () =>
       import('../modules/users/users.module').then((m) => m.UsersModule),
