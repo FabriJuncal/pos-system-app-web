@@ -7,6 +7,7 @@ export class UserModel extends AuthModel {
   username: string;
   password: string;
   name: string;
+  surname: string;
   email: string;
   pic: string;
   roles: number[] = [];
@@ -23,6 +24,8 @@ export class UserModel extends AuthModel {
   // account information
   language: string;
   timeZone: string;
+  type_user: number;
+  roleId: number;
   communication: {
     email: boolean;
     sms: boolean;
@@ -55,6 +58,7 @@ export class UserModel extends AuthModel {
     this.username = user.username || '';
     this.password = user.password || '';
     this.name = user.name || '';
+    this.surname = user.surname || '';
     this.email = user.email || '';
     this.pic = user.pic || './assets/media/avatars/blank.png';
     this.roles = user.roles || [];
@@ -64,5 +68,7 @@ export class UserModel extends AuthModel {
     this.address = user.address;
     this.socialNetworks = user.socialNetworks;
     this.initiated = this.initiated || false;
+    this.type_user = user.type_user || 0;
+    this.roleId = user.roleId || 0;
   }
 }

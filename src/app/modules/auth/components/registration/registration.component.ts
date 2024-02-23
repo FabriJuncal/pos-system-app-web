@@ -52,6 +52,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             Validators.maxLength(100),
           ]),
         ],
+        surname: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(100),
+          ]),
+        ],
         email: [
           '',
           Validators.compose([
@@ -78,6 +86,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           ]),
         ],
         agree: [false, Validators.compose([Validators.required])],
+        type_user: [2],
+        roleId: [2]
       },
       {
         validator: ConfirmPasswordValidator.MatchPassword,

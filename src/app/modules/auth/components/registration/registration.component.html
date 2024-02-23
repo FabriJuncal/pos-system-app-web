@@ -87,6 +87,32 @@
 
   <!--begin::Form group-->
   <div class="fv-row mb-8">
+    <label class="form-label fw-bolder text-dark fs-6">Apellido</label>
+    <input class="form-control bg-transparent" type="text" name="surname" formControlName="surname"
+      placeholder="Apellido" autocomplete="off" [ngClass]="{
+        'is-invalid': registrationForm.controls['surname'].invalid,
+        'is-valid': registrationForm.controls['surname'].valid
+      }" />
+    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'El apellido es requerido',
+        control: registrationForm.controls['surname']
+      }"></ng-container>
+    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'El apellido debe tener al menos 3 símbolos',
+        control: registrationForm.controls['surname']
+      }"></ng-container>
+    <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'El apellido debe tener un máximo de 100 carácteres',
+        control: registrationForm.controls['surname']
+      }"></ng-container>
+  </div>
+  <!--end::Form group-->
+
+  <!--begin::Form group-->
+  <div class="fv-row mb-8">
     <label class="form-label fw-bolder text-dark fs-6">Email</label>
     <input class="form-control bg-transparent" type="email" placeholder="Email" name="email" formControlName="email"
       autocomplete="off" [ngClass]="{
