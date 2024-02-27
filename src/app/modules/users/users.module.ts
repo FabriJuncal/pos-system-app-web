@@ -13,6 +13,7 @@ import { DeleteUsersComponent } from './components/delete-users/delete-users.com
 import { WidgetsModule } from '../../_metronic/partials';
 import { SharedModule } from 'src/app/_metronic/shared/shared.module';
 import { ComponentsModule } from '../../components/components.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ComponentsModule } from '../../components/components.module';
         FormsModule,
         ReactiveFormsModule,
         ComponentsModule,
-        NgbModule
+        NgbModule,
+        NgSelectModule
     ]
 })
 export class UsersModule { }

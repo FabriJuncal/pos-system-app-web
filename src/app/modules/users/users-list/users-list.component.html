@@ -1,7 +1,7 @@
-<ng-container *ngIf="isLoading$ | async">
+<ng-container *ngIf="isLoadingUser$ && isLoadingRol$ | async">
   <app-loader></app-loader>
 </ng-container>
-<ng-container *ngIf="(isLoading$ | async) === false">
+<ng-container *ngIf="(isLoadingUser$ && isLoadingRol$ | async) === false">
   <div class="card mb-5 mb-xl-8">
     <!-- begin::Header -->
     <div class="card-header border-0 pt-5 justify-content-end">
@@ -9,69 +9,64 @@
         <span class="card-label fw-bolder fs-3 mb-1">New Arrivals</span>
         <span class="text-muted mt-1 fw-bold fs-7">Over 500 new products</span>
       </h3> -->
-      <div class="card-body">
+      <div class="card-body container">
         <!-- begin: Filtration form -->
         <div class="form form-label-right">
           <div class="form-group row">
-            <div class="col-lg-2">
-              <select
-              class="form-control"
-              name="status"
-              placeholder="Filtrar por Estado"
-              [(ngModel)]="state">
-              <option value="">Todos</option>
-              <option value="1">Activo</option>
-              <option value="2">Inactivo</option>
-              </select>
-              <small class="form-text text-muted"><b>Filtrar</b> por Estado</small>
+            <div class="col-lg-8">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col col-lg-12">
+                  <input
+                  type="text"
+                  class="form-control"
+                  name="searchText"
+                  placeholder="Ingrese un Correo o Nombre"
+                  value=""
+                  [(ngModel)]="search"
+                /><small class="form-text text-muted"
+                  ><b>Buscar</b> por correo y nombre</small
+                >
                 </div>
-                <div class="col-lg-6">
-                  <select
-                    class="form-control"
-                    placeholder="Filtro por Rol"
-                    name="condition"
-                    formControlName="condition"
-                  >
-                    <option value="">Todos</option>
-                    <option  *ngFor="let rol of roles" [value]="rol.id">{{ rol.name }}</option>
-                  </select>
+              </div>
+              <div class="row mt-5">
+                <div class="col col-lg-4">
+                  <ng-select [(ngModel)]="state" placeholder="Selecciona el Estado">
+                    <ng-option class="form-control" value="1">Activo</ng-option>
+                    <ng-option class="form-control" value="2">Inactivo</ng-option>
+                 </ng-select>
+                  <small class="form-text text-muted"><b>Filtrar</b> por Estado</small>
+                </div>
+                <div class="col col-lg-8">
+                  <ng-select [(ngModel)]="selectedRol" placeholder="Selecciona un Rol">
+                    <ng-option class="form-control" *ngFor="let rol of roles" [value]="rol.id">{{rol.name}}</ng-option>
+                 </ng-select>
                     <small class="form-text text-muted"
                     ><b>Filtro</b> por Rol</small
                   >
                 </div>
               </div>
             </div>
-            <div class="col-lg-3">
-              <input
-                type="text"
-                class="form-control"
-                name="searchText"
-                placeholder="Buscar"
-                value=""
-                [(ngModel)]="search"
-              /><small class="form-text text-muted"
-                ><b>Buscar</b> por correo y nombre</small
-              >
-            </div>
-            <div class="col-lg-3">
-              <button class="btn btn-sm btn-primary" placement="top" [ngbTooltip]="'Filtro'" (click)="allUsers()">
-                <app-keenicon name="filter-search" type="outline"  class="text-white fs-2x"></app-keenicon>
-              </button>
-              <button class="btn btn-sm btn-dark ms-2" placement="top" [ngbTooltip]="'Reset'" (click)="reset()">
-                <app-keenicon name="arrows-circle" type="outline" class="text-white fs-2x"></app-keenicon>
-              </button>
+            <div class="col col-lg-4">
+              <div class="row mt-5 mt-lg-0">
+                <div class="col-1 col-12 col-sm-3 col-lg-3 row-cols-1 row-cols-sm-12 row-cols-lg-12">
+                  <button class="btn btn-sm btn-primary" placement="top" [ngbTooltip]="'Filtrar'" (click)="allUsers()">
+                    <app-keenicon name="filter-search" type="outline"  class="text-white fs-2x"></app-keenicon>
+                  </button>
+                </div>
+                <div class="col-1 col-12 col-sm-3 col-lg-3 row-cols-1 row-cols-sm-12 row-cols-lg-12 mt-2 mt-sm-0 mt-lg-0">
+                  <button class="btn btn-sm btn-dark" placement="top" [ngbTooltip]="'Refrescar'" (click)="reset()">
+                    <app-keenicon name="arrows-circle" type="outline" class="text-white fs-2x"></app-keenicon>
+                  </button>
+                </div>
+                <div class="col-1 col-12 col-sm-3 col-lg-3 row-cols-1 row-cols-sm-12 row-cols-lg-12 mt-2 mt-sm-0 mt-lg-0">
+                  <button class="btn btn-sm btn-primary" placement="top" [ngbTooltip]="'Crear Usuario'" (click)="addUser()">
+                    <app-keenicon name="plus" class="text-white fs-2x"></app-keenicon>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="card-toolbar">
-        <button class="btn btn-sm btn-primary"
-          (click)="addUser()">
-          <app-keenicon name="plus" class="text-white fs-2"></app-keenicon>
-          Nuevo Usuario
-        </button>
       </div>
     </div>
     <!-- end::Header -->

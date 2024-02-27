@@ -4,8 +4,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { UsersService } from '../../services/users.service';
 
 import { NgbActiveModal, } from '@ng-bootstrap/ng-bootstrap';
-import { catchError, of } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { RolesService } from '../../../roles/services/roles.service';
+import { RolModel } from 'src/app/modules/roles/models/roles.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-users',
@@ -21,17 +24,25 @@ export class AddUsersComponent implements OnInit  {
   isLoading = false;
   validatePassword = true;
 
+  selectedRol: string;
+  roles: RolModel[];
+
   formGroup: FormGroup
 
   constructor(
     private fb: FormBuilder,
     private _userService: UsersService,
+    private _rolesService: RolesService,
     public modal: NgbActiveModal,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.isLoading$ = this._userService.isLoading$;
+    this._rolesService.roles$
+    .subscribe((value) => this.roles = value.roles.data)
+
+
     this.loadForm();
   }
 

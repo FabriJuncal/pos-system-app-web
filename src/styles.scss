@@ -18,6 +18,9 @@
 // Estilos para el componente Dropzone: https://www.npmjs.com/package/ngx-dropzone-wrapper
 @import"node_modules/ngx-dropzone-wrapper/node_modules/dropzone/dist/min/dropzone.min.css";
 
+// Estilos para el componente Ng-Select: https://github.com/ng-select/ng-select
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 
 // Estilos para el componente Toastr: https://github.com/scttcper/ngx-toastr
 @import 'ngx-toastr/toastr-bs5-alert';

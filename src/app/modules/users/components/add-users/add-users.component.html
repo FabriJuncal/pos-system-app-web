@@ -11,7 +11,7 @@
     </div>
   </div>
   <div
-    class="overlay overlay-block cursor-default modal-body"
+    class="cursor-default modal-body"
     style="min-height: 404px"
   >
     <ng-container *ngIf="isLoading$ | async">
@@ -57,7 +57,7 @@
                 El nombre debe tener un máximo de 100 letras
               </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-6 mt-3 mt-lg-3">
               <label class="form-label required">Apellidos Completos:</label>
               <input type="text"
               class="form-control form-control-solid form-control-lg"
@@ -92,7 +92,7 @@
           </div>
       </div>
       <div class="form-group row justify-content-center">
-          <div class="col-lg-10">
+          <div class="col-lg-10 mt-3">
               <label class="form-label required">Correo Electrónico:</label>
               <input type="text"
               class="form-control form-control-solid form-control-lg"
@@ -119,18 +119,15 @@
                 El correo electrónico debe tener un máximo de 255 letras
               </div>
           </div>
-          <div class="col-lg-10">
+          <div class="col-lg-10 mt-3">
               <label class="form-label required">Rol:</label>
-              <select name="role_id"
-              class="form-control form-control-solid form-control-lg"
-              formControlName="role_id">
-                  <option value="0">--Seleccione un Rol--</option>
-                  <option value="1">ADMINISTRADOR GENERAL</option>
-              </select>
+              <ng-select [(ngModel)]="selectedRol" placeholder="Selecciona un Rol">
+                <ng-option class="form-control form-control-solid form-control-lg" *ngFor="let rol of roles" [value]="rol?.id">{{rol?.name}}</ng-option>
+              </ng-select>
           </div>
       </div>
       <div class="form-group row">
-          <div class="col-lg-6">
+          <div class="col-lg-6 mt-4">
               <label class="form-label required">Contraseña:</label>
               <input type="password"
               class="form-control form-control-solid form-control-lg"
@@ -163,7 +160,7 @@
                   La contraseña debe tener un máximo de 255 letras
               </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-6 mt-3">
               <label class="form-label required">Repetir Contraseña:</label>
               <input type="password"
               class="form-control form-control-solid form-control-lg"

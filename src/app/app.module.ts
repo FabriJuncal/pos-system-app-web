@@ -17,6 +17,7 @@ import { FakeAPIService } from './_fake/fake-api.service';
 import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TagifyModule } from 'ngx-tagify';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 function appInitializer(authService: AuthService) {
@@ -49,7 +50,8 @@ function appInitializer(authService: AuthService) {
     NgbModule,
     ToastrModule.forRoot(),
     CKEditorModule,
-    TagifyModule.forRoot()
+    TagifyModule.forRoot(),
+    NgSelectModule
   ],
   providers: [
     {

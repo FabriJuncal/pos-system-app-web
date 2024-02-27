@@ -8,6 +8,8 @@ import { ModalConfig } from '../../../_metronic/partials/layout/modals/modal.con
 import { ModalComponent } from '../../../_metronic/partials';
 import { EditUsersComponent } from '../components/edit-users/edit-users.component';
 import { DeleteUsersComponent } from '../components/delete-users/delete-users.component';
+import { RolesService } from '../../roles/services/roles.service';
+import { RolModel } from '../../roles/models/roles.model';
 
 @Component({
   selector: 'app-users-list',
@@ -24,26 +26,33 @@ export class UsersListComponent implements OnInit {
     modalTitle: 'Crear Usuario',
   };
 
-  isLoading$: Observable<boolean>;
-  isLoading = false;
+  isLoadingUser$: Observable<boolean>;
+  isLoadingRol$: Observable<boolean>;
+
   totalPages = 1;
   currentPage = 1;
 
-  state = '';
+  state: string;
   search: string;
 
   users: any = [];
   validatePassword: any;
 
+  roles: RolModel[];
+  selectedRol: string;
+
   constructor(
     private fb: FormBuilder,
     private _userService: UsersService,
+    private _rolesService: RolesService,
     private modelService: NgbModal
     ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._userService.isLoading$;
+    this.isLoadingUser$ = this._userService.isLoading$;
+    this.isLoadingRol$ = this._rolesService.isLoading$;
     this.allUsers();
+    this.allRoles();
   }
 
   allUsers(page = 1){
@@ -53,6 +62,14 @@ export class UsersListComponent implements OnInit {
       this.users = resp.users.data;
       this.totalPages = resp.total;
       this.currentPage = page;
+    })
+  }
+
+  allRoles(){
+    this._rolesService.getRoles()
+    .subscribe((resp:any) => {
+      console.log('allRoles->',resp);
+      this.roles = resp.roles.data;
     })
   }
 

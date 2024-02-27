@@ -1,5 +1,5 @@
 export class ListRolesModel {
-  total: number;
+  total: number | null;
   roles: {
       data: RolModel[],
   }
