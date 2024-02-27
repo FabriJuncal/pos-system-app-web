@@ -221,7 +221,7 @@
     <button type="submit" id="kt_sign_up_submit" [disabled]="
         registrationForm.invalid || !registrationForm.controls['agree'].value
       " class="btn btn-primary">
-      <ng-container *ngIf="(isLoading$ | async) === false">
+      <ng-container *ngIf="(isLoading$ | async) === 0">
         <span class="indicator-label">Enviar</span>
       </ng-container>
       <ng-container *ngIf="isLoading$ | async">

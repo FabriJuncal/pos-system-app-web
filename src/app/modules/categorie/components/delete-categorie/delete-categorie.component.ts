@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { CategorieModel } from '../../models/categorie.model';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-delete-categorie',
@@ -20,7 +21,7 @@ export class DeleteCategorieComponent implements OnInit {
   URL_IMAGE_CATEGORIE= `${environment.urlImages}/categories/`;
 
   errorMessage: string;
-  isLoading$: Observable<boolean>;
+  isLoading$: Observable<number>;
   isLoading = false;
 
   name: string;
@@ -30,12 +31,13 @@ export class DeleteCategorieComponent implements OnInit {
 
   constructor(
     private _categorieService: CategorieService,
+    private _httpRequestState: HttpRequestStateService,
     public modal: NgbActiveModal,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._categorieService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this.loadForm();
   }
 

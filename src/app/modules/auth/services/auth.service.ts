@@ -6,6 +6,7 @@ import { AuthModel } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { HttpRequestStateService } from '../../../_metronic/shared/services/http-request-state.service';
 
 export type UserType = UserModel | undefined;
 
@@ -19,9 +20,7 @@ export class AuthService implements OnDestroy {
 
   // public fields
   currentUser$: Observable<UserType>;
-  isLoading$: Observable<boolean>;
   currentUserSubject: BehaviorSubject<UserType>;
-  isLoadingSubject: BehaviorSubject<boolean>;
 
   type_user = 2;
   user: any;
@@ -37,19 +36,18 @@ export class AuthService implements OnDestroy {
 
   constructor(
     private authHttpService: AuthHTTPService,
-    private router: Router
+    private router: Router,
+    private _httpRequestState: HttpRequestStateService
   ) {
-    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserType>(undefined);
     this.currentUser$ = this.currentUserSubject.asObservable();
-    this.isLoading$ = this.isLoadingSubject.asObservable();
     // const subscr = this.getUserByToken().subscribe();
     // this.unsubscribe.push(subscr);
   }
 
   // public methods
   login(email: string, password: string): Observable<UserType> {
-    this.isLoadingSubject.next(true);
+    this._httpRequestState.onRequestStart();
     return this.authHttpService.login(email, password, this.type_user).pipe(
       map((auth: AuthModel) => {
         this.setAuthFromLocalStorage(auth);
@@ -59,7 +57,7 @@ export class AuthService implements OnDestroy {
         console.error('err', err);
         return of(undefined);
       }),
-      finalize(() => this.isLoadingSubject.next(false))
+      finalize(() => this._httpRequestState.onRequestEnd())
     );
   }
 
@@ -78,7 +76,7 @@ export class AuthService implements OnDestroy {
 
     this.token = auth.token;
 
-    this.isLoadingSubject.next(true);
+    this._httpRequestState.onRequestStart();
     return this.authHttpService.getUserByToken(auth.token).pipe(
       map((user: UserType) => {
         if (user) {
@@ -88,31 +86,31 @@ export class AuthService implements OnDestroy {
         }
         return user;
       }),
-      finalize(() => this.isLoadingSubject.next(false))
+      finalize(() => this._httpRequestState.onRequestEnd())
     );
   }
 
   // need create new user then login
   registration(user: UserModel): Observable<any> {
-    this.isLoadingSubject.next(true);
+    this._httpRequestState.onRequestStart();
     return this.authHttpService.createUser(user).pipe(
       map(() => {
-        this.isLoadingSubject.next(false);
+        this._httpRequestState.onRequestEnd();
       }),
       switchMap(() => this.login(user.email, user.password)),
       catchError((err) => {
         console.error('err', err);
         return of(undefined);
       }),
-      finalize(() => this.isLoadingSubject.next(false))
+      finalize(() => this._httpRequestState.onRequestEnd())
     );
   }
 
   forgotPassword(email: string): Observable<boolean> {
-    this.isLoadingSubject.next(true);
+    this._httpRequestState.onRequestStart();
     return this.authHttpService
       .forgotPassword(email)
-      .pipe(finalize(() => this.isLoadingSubject.next(false)));
+      .pipe(finalize(() => this._httpRequestState.onRequestEnd()));
   }
 
   // private methods

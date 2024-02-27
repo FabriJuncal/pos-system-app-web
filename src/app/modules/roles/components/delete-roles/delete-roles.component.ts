@@ -4,6 +4,7 @@ import { RolModel } from '../../models/roles.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, catchError, of } from 'rxjs';
+import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-delete-roles',
@@ -16,19 +17,20 @@ export class DeleteRolesComponent {
   @Output() rolesE: EventEmitter<any> = new EventEmitter();
 
   errorMessage: string;
-  isLoading$: Observable<boolean>;
+  isLoading$: Observable<number>;
   isLoading = false;
 
   name: string;
 
   constructor(
     private _rolesService: RolesService,
+    private _httpRequestState: HttpRequestStateService,
     public modal: NgbActiveModal,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._rolesService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this.loadForm();
   }
 

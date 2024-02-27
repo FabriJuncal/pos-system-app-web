@@ -7,6 +7,7 @@ import { ProductVariationsModel } from '../../models/product-variations.model';
 import { AddProductVariationsComponent } from '../add-product-variations/add-product-variations.component';
 import { EditProductVariationsComponent } from '../edit-product-variations/edit-product-variations.component';
 import { DeleteProductVariationsComponent } from '../delete-product-variations/delete-product-variations.component';
+import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-list-product-variations',
@@ -16,7 +17,7 @@ import { DeleteProductVariationsComponent } from '../delete-product-variations/d
 export class ListProductVariationsComponent implements OnInit   {
 
   URL_PRODUCT_VARIATIONS= `${environment.urlImages}/products/variations`;
-  isLoading$: Observable<boolean>;
+  isLoading$: Observable<number>;
   totalPages = 1;
   currentPage = 1;
   search: string;
@@ -25,11 +26,12 @@ export class ListProductVariationsComponent implements OnInit   {
 
   constructor(
     private _productVariationsService: ProductVariationsService,
+    private _httpRequestState: HttpRequestStateService,
     private modelService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._productVariationsService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this.allProductVariations();
   }
 

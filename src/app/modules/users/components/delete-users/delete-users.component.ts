@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-delete-users',
@@ -21,12 +22,13 @@ export class DeleteUsersComponent implements OnInit {
 
   constructor(
     private _userService: UsersService,
+    private _httpRequestState: HttpRequestStateService,
     public modal: NgbActiveModal,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._userService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
   }
 
   delete(){

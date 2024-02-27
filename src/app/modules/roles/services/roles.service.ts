@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../auth';
 import { finalize, map } from 'rxjs/operators';
 import { ListRolesModel, RolModel } from '../models/roles.model';
+import { HttpRequestStateService } from '../../../_metronic/shared/services/http-request-state.service';
 
 const API_ROL_URL = `${environment.apiUrl}/rol`;
 
@@ -15,18 +16,14 @@ export class RolesService {
 
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
-  isLoading$: Observable<boolean>;
-  isLoadingSubject: BehaviorSubject<boolean>
-
   roles$:Observable<ListRolesModel>;
   rolesSubject: BehaviorSubject<ListRolesModel>;
 
   constructor(
     private http: HttpClient,
-    public authService: AuthService
+    public authService: AuthService,
+    private _httpRequestState: HttpRequestStateService
   ) {
-    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
-    this.isLoading$ = this.isLoadingSubject.asObservable();
 
     this.rolesSubject = new BehaviorSubject<ListRolesModel>({
       total: null,
@@ -38,16 +35,16 @@ export class RolesService {
    }
 
   createRol(data: FormData){
-    this.isLoadingSubject.next(true);
+    this._httpRequestState.onRequestStart();
     const headers = new HttpHeaders({'Authorization' : 'Bearer ' + this.authService.token})
     return this.http.post<RolModel>(`${API_ROL_URL}/create`, data, {headers: headers})
     .pipe(
-      finalize(() => this.isLoadingSubject.next(false))
+      finalize(() => this._httpRequestState.onRequestEnd())
     );
   }
 
   getRoles(page = 1, search: string = ''){
-    this.isLoadingSubject.next(true);
+    this._httpRequestState.onRequestStart();
     const headers = new HttpHeaders({'Authorization' : 'Bearer ' + this.authService.token})
     let filter = '';
     if(search){
@@ -60,25 +57,25 @@ export class RolesService {
         this.rolesSubject.next(resp);
         return resp;
       }),
-      finalize(() => this.isLoadingSubject.next(false))
+      finalize(() => this._httpRequestState.onRequestEnd())
     );
   }
 
   updateRol(rol_id: number, data: any){
-    this.isLoadingSubject.next(true);
+    this._httpRequestState.onRequestStart();
     const headers = new HttpHeaders({'Authorization' : 'Bearer ' + this.authService.token})
     return this.http.post<RolModel>(`${API_ROL_URL}/update/${rol_id}`, data, {headers: headers})
     .pipe(
-      finalize(() => this.isLoadingSubject.next(false))
+      finalize(() => this._httpRequestState.onRequestEnd())
     );
   }
 
   deleteRol(rol_id: number){
-    this.isLoadingSubject.next(true);
+    this._httpRequestState.onRequestStart();
     const headers = new HttpHeaders({'Authorization' : 'Bearer ' + this.authService.token})
     return this.http.delete<RolModel>(`${API_ROL_URL}/delete/${rol_id}`, {headers: headers})
     .pipe(
-      finalize(() => this.isLoadingSubject.next(false))
+      finalize(() => this._httpRequestState.onRequestEnd())
     );
   }
 }

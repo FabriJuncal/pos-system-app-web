@@ -8,6 +8,7 @@ import { RolesService } from '../services/roles.service';
 import { AddRolesComponent } from '../components/add-roles/add-roles.component';
 import { EditRolesComponent } from '../components/edit-roles/edit-roles.component';
 import { DeleteRolesComponent } from '../components/delete-roles/delete-roles.component';
+import { HttpRequestStateService } from '../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-roles-list',
@@ -24,7 +25,7 @@ export class RolesListComponent {
     modalTitle: 'Crear Rol',
   };
 
-  isLoading$: Observable<boolean>;
+  isLoading$: Observable<number>;
   isLoading = false;
   totalPages = 1;
   currentPage = 1;
@@ -37,11 +38,12 @@ export class RolesListComponent {
   constructor(
     private fb: FormBuilder,
     private _rolesService: RolesService,
+    private _httpRequestState: HttpRequestStateService,
     private modelService: NgbModal
     ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._rolesService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this.allRoles();
   }
 

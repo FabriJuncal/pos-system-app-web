@@ -50,3 +50,10 @@ ng generate component components/single-image
 ng generate component components/multi-image
 ng generate component components/info-message
 ng generate component components/colored-circle
+
+ng g s _metronic/shared/services/HttpRequestState
+
+ng generate interceptor _metronic/shared/interceptors/http-request
+
+ng g directive  _metronic/shared/directives/tooltip
+

@@ -1,16 +1,19 @@
 import {NgModule} from '@angular/core';
 import {KeeniconComponent} from './keenicon/keenicon.component';
 import {CommonModule} from "@angular/common";
+import { TooltipDirective } from './directives/tooltip.directive';
 
 @NgModule({
   declarations: [
-    KeeniconComponent
+    KeeniconComponent,
+    TooltipDirective
   ],
   imports: [
     CommonModule,
   ],
   exports: [
-    KeeniconComponent
+    KeeniconComponent,
+    TooltipDirective
   ]
 })
 export class SharedModule {

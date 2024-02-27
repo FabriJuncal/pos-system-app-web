@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { ConfirmPasswordValidator } from './confirm-password.validator';
 import { UserModel } from '../../models/user.model';
 import { first } from 'rxjs/operators';
+import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +16,7 @@ import { first } from 'rxjs/operators';
 export class RegistrationComponent implements OnInit, OnDestroy {
   registrationForm: FormGroup;
   hasError: boolean;
-  isLoading$: Observable<boolean>;
+  isLoading$: Observable<number>;
 
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
@@ -23,9 +24,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private _httpRequestState: HttpRequestStateService,
     private router: Router
   ) {
-    this.isLoading$ = this.authService.isLoading$;
+    this.isLoading$ = this._httpRequestState.getRequestState();
     // redirect to home if already logged in
     if (this.authService.currentUserValue) {
       this.router.navigate(['/']);

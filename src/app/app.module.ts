@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TranslateModule } from '@ngx-translate/core';
@@ -18,6 +18,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TagifyModule } from 'ngx-tagify';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { HttpRequestInterceptor } from './_metronic/shared/interceptors/http-request.interceptor';
+import { HttpRequestStateService } from './_metronic/shared/services/http-request-state.service';
 
 
 function appInitializer(authService: AuthService) {
@@ -60,6 +62,8 @@ function appInitializer(authService: AuthService) {
       multi: true,
       deps: [AuthService],
     },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+    HttpRequestStateService
   ],
   bootstrap: [AppComponent],
 })

@@ -10,13 +10,14 @@ import { EditUsersComponent } from '../components/edit-users/edit-users.componen
 import { DeleteUsersComponent } from '../components/delete-users/delete-users.component';
 import { RolesService } from '../../roles/services/roles.service';
 import { RolModel } from '../../roles/models/roles.model';
+import { HttpRequestStateService } from 'src/app/_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit{
 
   @ViewChild('modal') private modalComponent: ModalComponent;
 
@@ -28,6 +29,7 @@ export class UsersListComponent implements OnInit {
 
   isLoadingUser$: Observable<boolean>;
   isLoadingRol$: Observable<boolean>;
+  isLoading$: any;
 
   totalPages = 1;
   currentPage = 1;
@@ -45,12 +47,12 @@ export class UsersListComponent implements OnInit {
     private fb: FormBuilder,
     private _userService: UsersService,
     private _rolesService: RolesService,
-    private modelService: NgbModal
+    private modelService: NgbModal,
+    private _httpRequestStateService: HttpRequestStateService,
     ) { }
 
   ngOnInit(): void {
-    this.isLoadingUser$ = this._userService.isLoading$;
-    this.isLoadingRol$ = this._rolesService.isLoading$;
+    this.isLoading$ = this._httpRequestStateService.getRequestState();
     this.allUsers();
     this.allRoles();
   }

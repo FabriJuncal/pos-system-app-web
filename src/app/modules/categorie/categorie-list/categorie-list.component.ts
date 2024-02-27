@@ -7,6 +7,7 @@ import { EditCategorieComponent } from '../components/edit-categorie/edit-catego
 import { DeleteCategorieComponent } from '../components/delete-categorie/delete-categorie.component';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { HttpRequestStateService } from '../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-categorie-list',
@@ -16,7 +17,7 @@ import { Observable } from 'rxjs';
 export class CategorieListComponent implements OnInit {
 
   URL_IMAGE_CATEGORIE= `${environment.urlImages}/categories`;
-  isLoading$: Observable<boolean>;
+  isLoading$: Observable<number>;
   totalPages = 1;
   currentPage = 1;
   search: string;
@@ -25,11 +26,12 @@ export class CategorieListComponent implements OnInit {
 
   constructor(
     private _categorieService: CategorieService,
+    private _httpRequestState: HttpRequestStateService,
     private modelService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._categorieService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this.allCategories();
   }
 

@@ -7,6 +7,7 @@ import { CategorieModel } from '../../models/categorie.model';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { UploadSingleImage } from '../../../../components/upload-single-image/upload-single-image';
+import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-edit-categorie',
@@ -36,12 +37,13 @@ export class EditCategorieComponent implements OnInit {
 
   constructor(
     private _categorieService: CategorieService,
+    private _httpRequestState: HttpRequestStateService,
     public modal: NgbActiveModal,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._categorieService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this.loadForm();
     this.initComponents();
   }

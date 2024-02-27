@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CategorieService } from '../../categorie/services/categorie.service';
 import { CategorieModel } from '../../categorie/models/categorie.model';
 import { AddCategorieComponent } from '../../categorie/components/add-categorie/add-categorie.component';
+import { HttpRequestStateService } from '../../../_metronic/shared/services/http-request-state.service';
 
 
 @Component({
@@ -44,7 +45,7 @@ export class AddProductComponent implements OnInit  {
 
   text: any;
 
-  isLoading$: Observable<boolean>;
+  isLoading$: Observable<number>;
 
   whitelist$ = new BehaviorSubject<TagData[]>([
     {value: '1', name: 'hello'},
@@ -56,11 +57,12 @@ export class AddProductComponent implements OnInit  {
     public modal: NgbActiveModal,
     private toastr: ToastrService,
     private _categorieService: CategorieService,
+    private _httpRequestState: HttpRequestStateService,
     private modelService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._categorieService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this.initComponents();
   }
 

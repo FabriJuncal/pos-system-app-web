@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RolesService } from '../../../roles/services/roles.service';
 import { RolModel } from 'src/app/modules/roles/models/roles.model';
 import { finalize } from 'rxjs/operators';
+import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-add-users',
@@ -33,12 +34,13 @@ export class AddUsersComponent implements OnInit  {
     private fb: FormBuilder,
     private _userService: UsersService,
     private _rolesService: RolesService,
+    private _httpRequestState: HttpRequestStateService,
     public modal: NgbActiveModal,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._userService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this._rolesService.roles$
     .subscribe((value) => this.roles = value.roles.data)
 

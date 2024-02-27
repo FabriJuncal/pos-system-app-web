@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UploadSingleImage } from '../../../../components/upload-single-image/upload-single-image';
 import { ProductVariationsService } from '../../services/product-variations.service';
 import { InfoMessageModel } from 'src/app/components/info-message/info-message.model';
+import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
   selector: 'app-add-product-variations',
@@ -42,12 +43,13 @@ export class AddProductVariationsComponent implements OnInit {
 
   constructor(
     private _productVariationsService: ProductVariationsService,
+    private _httpRequestState: HttpRequestStateService,
     public modal: NgbActiveModal,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this._productVariationsService.isLoading$;
+    this.isLoading$ = this.isLoading$ = this._httpRequestState.getRequestState();
     this.initComponents();
   }
 
