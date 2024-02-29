@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderComponent } from './loader/loader.component';
 import { UploadSingleImageComponent } from './upload-single-image/upload-single-image.component';
-import { SharedModule } from '../_metronic/shared/shared.module';
 import { TabComponent } from './tab/tab.component';
 import { TabGroupComponent } from './tab-group/tab-group.component';
 import { TagComponent } from './tag/tag.component';
@@ -13,6 +12,7 @@ import { UploadMultiImageComponent } from './upload-multi-image/upload-multi-ima
 import { DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
 import { InfoMessageComponent } from './info-message/info-message.component';
 import { ColoredCircleComponent } from './colored-circle/colored-circle.component';
+import { SharedModule } from '../shared.module';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {

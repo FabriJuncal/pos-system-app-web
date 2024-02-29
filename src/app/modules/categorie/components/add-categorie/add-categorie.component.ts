@@ -4,8 +4,8 @@ import { CategorieService } from '../../services/categorie.service';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { UploadSingleImage } from '../../../../components/upload-single-image/upload-single-image';
 import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
+import { UploadSingleImage } from '../../../../_metronic/shared/components/upload-single-image/upload-single-image';
 
 @Component({
   selector: 'app-add-categorie',

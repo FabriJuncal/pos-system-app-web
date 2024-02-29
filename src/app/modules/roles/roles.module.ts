@@ -11,8 +11,7 @@ import { NgbActiveModal, NgbModule, NgbPagination } from '@ng-bootstrap/ng-boots
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WidgetsModule } from 'src/app/_metronic/partials';
 import { SharedModule } from 'src/app/_metronic/shared/shared.module';
-import { ComponentsModule } from 'src/app/components/components.module';
-
+import { ComponentsModule } from '../../_metronic/shared/components/components.module';
 
 @NgModule({
   declarations: [

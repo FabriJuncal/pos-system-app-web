@@ -3,10 +3,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { UploadSingleImage } from '../../../../components/upload-single-image/upload-single-image';
 import { ProductVariationsService } from '../../services/product-variations.service';
-import { InfoMessageModel } from 'src/app/components/info-message/info-message.model';
 import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
+import { InfoMessageModel } from '../../../../_metronic/shared/components/info-message/info-message.model';
+import { UploadSingleImage } from '../../../../_metronic/shared/components/upload-single-image/upload-single-image';
 
 @Component({
   selector: 'app-add-product-variations',

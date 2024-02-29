@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule, NgbDatepickerModule, NgbActiveModal, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { SharedModule } from "../../_metronic/shared/shared.module";
-import { ComponentsModule } from '../../components/components.module';
+import { ComponentsModule } from '../../_metronic/shared/components/components.module';
 
 
 @NgModule({

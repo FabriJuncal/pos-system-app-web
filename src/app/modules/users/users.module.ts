@@ -12,7 +12,7 @@ import { EditUsersComponent } from './components/edit-users/edit-users.component
 import { DeleteUsersComponent } from './components/delete-users/delete-users.component';
 import { WidgetsModule } from '../../_metronic/partials';
 import { SharedModule } from 'src/app/_metronic/shared/shared.module';
-import { ComponentsModule } from '../../components/components.module';
+import { ComponentsModule } from '../../_metronic/shared/components/components.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 

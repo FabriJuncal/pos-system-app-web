@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { UploadSingleImage } from '../../../components/upload-single-image/upload-single-image';
-import { UploadMultiImage } from '../../../components/upload-multi-image/upload-multi-image';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { TagData } from 'ngx-tagify';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -10,6 +8,8 @@ import { CategorieService } from '../../categorie/services/categorie.service';
 import { CategorieModel } from '../../categorie/models/categorie.model';
 import { AddCategorieComponent } from '../../categorie/components/add-categorie/add-categorie.component';
 import { HttpRequestStateService } from '../../../_metronic/shared/services/http-request-state.service';
+import { UploadSingleImage } from '../../../_metronic/shared/components/upload-single-image/upload-single-image';
+import { UploadMultiImage } from '../../../_metronic/shared/components/upload-multi-image/upload-multi-image';
 
 
 @Component({

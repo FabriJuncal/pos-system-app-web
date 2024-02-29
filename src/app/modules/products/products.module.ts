@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbModalModule, NgbDatepickerModule, NgbActiveModal, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { SharedModule } from "../../_metronic/shared/shared.module";
-import { ComponentsModule } from '../../components/components.module';
+import { ComponentsModule } from '../../_metronic/shared/components/components.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ListProductVariationsComponent } from './components/list-product-variations/list-product-variations.component';
 import { AddProductVariationsComponent } from './components/add-product-variations/add-product-variations.component';
