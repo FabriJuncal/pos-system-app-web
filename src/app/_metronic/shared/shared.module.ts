@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {KeeniconComponent} from './keenicon/keenicon.component';
+import {KeeniconComponent} from './components/keenicon/keenicon.component';
 import {CommonModule} from "@angular/common";
 import { TooltipDirective } from './directives/tooltip.directive';
 

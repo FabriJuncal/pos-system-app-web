@@ -43,17 +43,19 @@ ng generate service modules/products/services/product-variations
 ng generate class modules/products/models/products.model
 ng generate class modules/products/models/product-variations.model
 
-ng generate component components/tab
-ng generate component components/tabGroup
-ng generate component components/loader
-ng generate component components/single-image
-ng generate component components/multi-image
-ng generate component components/info-message
-ng generate component components/colored-circle
+ng generate interface _metronic/shared/interfaces/image
+ng generate component _metronic/shared/components/tab
+ng generate component _metronic/shared/components/tabGroup
+ng generate component _metronic/shared/components/loader
+ng generate component _metronic/shared/components/single-image
+ng generate component _metronic/shared/components/multi-image
+ng generate component _metronic/shared/components/info-message
+ng generate component _metronic/shared/components/colored-circle
 
-ng g s _metronic/shared/services/HttpRequestState
+ng generate service _metronic/shared/services/HttpRequestState
+ng generate service _metronic/shared/services/image
 
 ng generate interceptor _metronic/shared/interceptors/http-request
 
-ng g directive  _metronic/shared/directives/tooltip
+ng generate directive  _metronic/shared/directives/tooltip
 
