@@ -51,9 +51,11 @@ ng generate component _metronic/shared/components/single-image
 ng generate component _metronic/shared/components/multi-image
 ng generate component _metronic/shared/components/info-message
 ng generate component _metronic/shared/components/colored-circle
+ng generate component _metronic/shared/components/dynamic-search-form
 
 ng generate service _metronic/shared/services/HttpRequestState
 ng generate service _metronic/shared/services/image
+ng generate service _metronic/shared/components/dynamic-search-form/dynamic-search-form
 
 ng generate interceptor _metronic/shared/interceptors/http-request
 

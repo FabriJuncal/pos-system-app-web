@@ -16,7 +16,7 @@ export class RolesService {
 
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
-  roles$:Observable<ListRolesModel>;
+  roles$: Observable<ListRolesModel>;
   rolesSubject: BehaviorSubject<ListRolesModel>;
 
   constructor(

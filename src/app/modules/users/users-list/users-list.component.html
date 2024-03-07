@@ -4,13 +4,8 @@
 <ng-container *ngIf="(isLoading$ | async) === 0">
   <div class="card mb-5 mb-xl-8">
     <!-- begin::Header -->
-    <div class="card-header border-0 pt-5 justify-content-end">
-      <!-- <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bolder fs-3 mb-1">New Arrivals</span>
-        <span class="text-muted mt-1 fw-bold fs-7">Over 500 new products</span>
-      </h3> -->
+    <!-- <div class="card-header border-0 pt-5 justify-content-end">
       <div class="card-body container">
-        <!-- begin: Filtration form -->
         <div class="form form-label-right">
           <div class="form-group row">
             <div class="col-lg-8">
@@ -49,7 +44,7 @@
             <div class="col col-lg-4">
               <div class="row mt-5 mt-lg-0">
                 <div class="col-1 col-12 col-sm-3 col-lg-3 row-cols-1 row-cols-sm-12 row-cols-lg-12">
-                  <button class="btn btn-sm btn-primary" appTooltip data-bs-placement="top" data-bs-title="Filtrar" (click)="allUsers()">
+                  <button class="btn btn-sm btn-primary" appTooltip data-bs-placement="top" data-bs-title="Filtrar" (click)="loadUsers()">
                     <app-keenicon name="filter-search" type="outline"  class="text-white fs-2x"></app-keenicon>
                   </button>
                 </div>
@@ -68,7 +63,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+
+    <app-dynamic-search-form (searchSubmit)="loadUsers($event)"></app-dynamic-search-form>
     <!-- end::Header -->
     <!-- begin::Body -->
     <div class="card-body py-3">
@@ -101,11 +98,13 @@
               <td class="ps-4 rounded-start">
                 <a
                   (click)="editUser(user)"
+                  appTooltip data-bs-placement="top" data-bs-title="Editar Usuario"
                   class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                   <app-keenicon name="pencil" class="fs-3 text-info"></app-keenicon>
                 </a>
                 <a
-                  (click)="delete(user)"
+                  (click)="deleteUser(user)"
+                  appTooltip data-bs-placement="top" data-bs-title="Eliminar Usuario"
                   class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                   <app-keenicon name="trash" class="fs-3 text-danger"></app-keenicon>
                 </a>

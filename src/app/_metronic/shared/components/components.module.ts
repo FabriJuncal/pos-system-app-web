@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderComponent } from './loader/loader.component';
 import { UploadSingleImageComponent } from './upload-single-image/upload-single-image.component';
 import { TabComponent } from './tab/tab.component';
@@ -13,6 +13,8 @@ import { DROPZONE_CONFIG, DropzoneConfigInterface, DropzoneModule } from 'ngx-dr
 import { InfoMessageComponent } from './info-message/info-message.component';
 import { ColoredCircleComponent } from './colored-circle/colored-circle.component';
 import { SharedModule } from '../shared.module';
+import { DynamicSearchFormComponent } from './dynamic-search-form/dynamic-search-form.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -31,7 +33,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TabGroupComponent,
     TagComponent,
     InfoMessageComponent,
-    ColoredCircleComponent
+    ColoredCircleComponent,
+    DynamicSearchFormComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,9 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TagifyModule,
     FormsModule,
     ReactiveFormsModule,
-    DropzoneModule
+    DropzoneModule,
+    NgbModule,
+    NgSelectModule
   ],
   exports: [
     LoaderComponent,
@@ -50,7 +55,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TabGroupComponent,
     TagComponent,
     InfoMessageComponent,
-    ColoredCircleComponent
+    ColoredCircleComponent,
+    DynamicSearchFormComponent
   ],
   providers: [
     {
