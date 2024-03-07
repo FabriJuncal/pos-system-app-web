@@ -24,7 +24,7 @@ export class DynamicSearchFormComponent implements OnInit {
       console.log('this.searchFields->', this.searchFields);
       this.form = this.fb.group({});
       this.searchFields.forEach(field => {
-        this.form.addControl(field.name, this.fb.control(''));
+        this.form.addControl(field.name, this.fb.control(null));
       });
     });
   }
