@@ -12,7 +12,7 @@ import { RolModel } from '../../roles/models/roles.model';
 import { HttpRequestStateService } from 'src/app/_metronic/shared/services/http-request-state.service';
 import { SearchField, SelectField } from '../../../_metronic/shared/components/dynamic-search-form/dynamic-search-form.model';
 import { DynamicSearchFormService } from '../../../_metronic/shared/components/dynamic-search-form/dynamic-search-form.service';
-import { finalize, map } from 'rxjs';
+import { FilterUserModel } from '../../auth/models/user.model';
 
 @Component({
   selector: 'app-users-list',
@@ -56,45 +56,20 @@ export class UsersListComponent implements OnInit{
 
   ngOnInit(): void {
     this.isLoading$ = this._httpRequestStateService.getRequestState();
-    this.loadUsers();
     this.loadRoles();
+    this.loadUsers();
     this.initComponents();
   }
 
-  loadUsers(page = 1): void {
-    this._userService.allUsers(page)
+  loadUsers(page = 1, filter?: FilterUserModel): void {
+    console.log('loadUsers->',filter);
+    this._userService.allUsers(page, filter)
       .subscribe((resp: any) => {
+        console.log('this._userService.allUsers', resp);
         this.users = resp.users.data;
         this.totalPages = resp.total;
         this.currentPage = page;
       });
-  }
-
-  loadRoles(): void {
-    this._rolesService.getRoles()
-    .subscribe((resp:any) =>{
-      console.log('allRoles->',resp);
-      this.roles = resp.roles.data;
-      this.selectedRol = this.roles.map((rol: RolModel) => ({
-        value: rol.id,
-        label: rol.name
-      }));
-
-      this.searchFields.push({
-        order: 2,
-        name: 'selectedRol',
-        label: {
-          bold: 'Filtrar',
-          normal: 'por Rol'
-        },
-        size: '6',
-        placeholder: 'Selecciona un Rol',
-        type: 'select',
-        options: this.selectedRol
-      });
-
-      this._dynamicSearchFormService.addFields(this.searchFields);
-    });
   }
 
 
@@ -113,9 +88,14 @@ export class UsersListComponent implements OnInit{
       }
     );
 
-    modalRef.componentInstance.usersE.subscribe((resp: any) => {
+    modalRef.componentInstance.trigger.subscribe((resp: any) => {
       this.users.unshift(resp);
     });
+  }
+
+  filterUsers(filter?: FilterUserModel, page = 1){
+    console.log('filterUsers->', filter);
+    this.loadUsers(page, filter);
   }
 
   loadPage(index: any): void {
@@ -134,7 +114,7 @@ export class UsersListComponent implements OnInit{
       }
     );
 
-    modalRef.componentInstance.usersE.subscribe((resp:any) => {
+    modalRef.componentInstance.trigger.subscribe((resp:any) => {
       const INDEX = this.users.findIndex((user: any) => user.id === resp.id);
       this.users[INDEX] = resp;
     });
@@ -152,9 +132,36 @@ export class UsersListComponent implements OnInit{
       }
     );
 
-    modalRef.componentInstance.usersE.subscribe((resp:any) => {
+    modalRef.componentInstance.trigger.subscribe((resp:any) => {
       const INDEX = this.users.findIndex((user: any) => user.id === resp.id);
       this.users.splice(INDEX, 1);
+    });
+  }
+
+  loadRoles(): void {
+    this._rolesService.getRoles()
+    .subscribe((resp:any) =>{
+      console.log('allRoles->',resp);
+      this.roles = resp.roles.data;
+      this.selectedRol = this.roles.map((rol: RolModel) => ({
+        value: rol.id,
+        label: rol.name
+      }));
+
+      this.searchFields.push({
+        order: 2,
+        name: 'rol',
+        label: {
+          bold: 'Filtrar',
+          normal: 'por Rol'
+        },
+        size: '6',
+        placeholder: 'Selecciona un Rol',
+        type: 'select',
+        options: this.selectedRol
+      });
+
+      this._dynamicSearchFormService.addFields(this.searchFields);
     });
   }
 
@@ -162,7 +169,7 @@ export class UsersListComponent implements OnInit{
     this.searchFields = [
       {
         order: 1,
-        name: 'searchText',
+        name: 'mailOrName',
         label: {
           bold: 'Buscar',
           normal: 'por correo y nombre'
@@ -183,11 +190,11 @@ export class UsersListComponent implements OnInit{
         type: 'select',
         options: [
           {
-            value: '1',
+            value: 1,
             label: 'Activo'
           },
           {
-            value: '2',
+            value: 2,
             label: 'Inactivo'
           }
         ],
@@ -195,6 +202,7 @@ export class UsersListComponent implements OnInit{
     ];
 
     this._dynamicSearchFormService.addFields(this.searchFields);
+    this._dynamicSearchFormService.addCreationForm(AddUsersComponent);
   }
 
 }

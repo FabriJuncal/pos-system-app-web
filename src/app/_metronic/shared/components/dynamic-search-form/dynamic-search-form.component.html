@@ -34,14 +34,14 @@
               </button>
             </div>
             <div class="col-1 ms-15 ms-md-5 ms-sm-10">
-              <button class="btn btn-sm btn-dark" appTooltip data-bs-placement="top" data-bs-title="Refrescar">
+              <a class="btn btn-sm btn-dark" appTooltip data-bs-placement="top" data-bs-title="Limpiar Filtro y Refrescar" (click)="clearFilterAndRefreshTable()">
                 <app-keenicon name="arrows-circle" type="outline" class="text-white fs-2x"></app-keenicon>
-              </button>
+              </a>
             </div>
             <div class="col-1 ms-15 ms-md-5 ms-sm-10">
-              <button class="btn btn-sm btn-primary" appTooltip data-bs-placement="top" data-bs-title="Crear">
+              <a class="btn btn-sm btn-primary" appTooltip data-bs-placement="top" data-bs-title="Crear" (click)="openFormAlta()">
                 <app-keenicon name="plus" class="text-white fs-2x"></app-keenicon>
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -121,7 +121,7 @@
           </div>
           <div class="col-lg-10 mt-3">
               <label class="form-label required">Rol:</label>
-              <ng-select [(ngModel)]="selectedRol" placeholder="Selecciona un Rol">
+              <ng-select formControlName="role_id" placeholder="Selecciona un Rol">
                 <ng-option class="form-control form-control-solid form-control-lg" *ngFor="let rol of roles" [value]="rol?.id">{{rol?.name}}</ng-option>
               </ng-select>
           </div>

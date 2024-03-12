@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { AuthService, UserModel } from '../../auth';
-import { finalize } from 'rxjs/operators';
+import { AuthService, FilterUserModel, UserModel } from '../../auth';
+import { catchError, finalize } from 'rxjs/operators';
 import { HttpRequestStateService } from '../../../_metronic/shared/services/http-request-state.service';
+import { Observable, of } from 'rxjs';
 
 const API_AUTH_URL = `${environment.apiUrl}/admin`;
 
@@ -29,20 +30,30 @@ export class UsersService {
     );
   }
 
-  allUsers(page = 1, state: string = '', search: string = ''){
+  allUsers(page = 1, filter?: FilterUserModel): Observable<UserModel[]> {
+
     this._httpRequestState.onRequestStart();
-    const headers = new HttpHeaders({'Authorization' : 'Bearer ' + this.authService.token})
-    let filter = '';
-    if(state){
-      filter = `${filter}&state=${state}`;
-    }
-    if(search){
-      filter = `${filter}&search=${search}`;
+
+    if (!this.authService.token) {
+      console.error('Auth token is not available');
+      this._httpRequestState.onRequestEnd();
+      return of([]);
     }
 
-    return this.http.get<UserModel>(`${API_AUTH_URL}/all?page=${page}${filter}`, {headers: headers})
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this.authService.token}` });
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('rol', filter?.rol || '')
+      .set('state', filter?.state  || '')
+      .set('search', filter?.mailOrName || '');
+
+    return this.http.get<UserModel[]>(`${API_AUTH_URL}/all`, { headers, params })
     .pipe(
-      finalize(() => this._httpRequestState.onRequestEnd())
+      finalize(() => this._httpRequestState.onRequestEnd()),
+      catchError((error) => {
+        console.error('Error fetching users:', error);
+        return of([]);
+      })
     );
   }
 

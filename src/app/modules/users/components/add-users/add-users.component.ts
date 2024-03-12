@@ -4,11 +4,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { UsersService } from '../../services/users.service';
 
 import { NgbActiveModal, } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, catchError, of } from 'rxjs';
+import { catchError, of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { RolesService } from '../../../roles/services/roles.service';
 import { RolModel } from 'src/app/modules/roles/models/roles.model';
-import { finalize } from 'rxjs/operators';
 import { HttpRequestStateService } from '../../../../_metronic/shared/services/http-request-state.service';
 
 @Component({
@@ -18,7 +17,7 @@ import { HttpRequestStateService } from '../../../../_metronic/shared/services/h
 })
 export class AddUsersComponent implements OnInit  {
 
-  @Output() usersE: EventEmitter<any> = new EventEmitter();
+  @Output() trigger: EventEmitter<any> = new EventEmitter();
 
   errorMessage: string;
   isLoading$: any;
@@ -58,7 +57,7 @@ export class AddUsersComponent implements OnInit  {
       name: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
       surname: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
       email: [null, Validators.compose([Validators.required, Validators.email, Validators.maxLength(255)])],
-      role_id: ['0', this.isControlRoleId],
+      role_id: [null, Validators.compose([Validators.required])],
       password: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(255)])],
       cpassword: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(255)])],
       type_user: ['2']
@@ -86,19 +85,9 @@ export class AddUsersComponent implements OnInit  {
     return control.dirty || control.touched;
   }
 
-  isControlRoleId(control: FormControl){
-    const selectedRole = control.value;
-    if(selectedRole === '0'){
-      return { roleIdInvalid: true};
-    }
-
-    return null;
-  }
-
   validateConfirmPassword() {
     return this.formGroup.value.password === this.formGroup.value.cpassword
   }
-
 
   save(){
     if(!this.validateConfirmPassword()){
@@ -118,7 +107,7 @@ export class AddUsersComponent implements OnInit  {
       if(resp && resp.status){
         this.modal.close();
         this.toastr.success(resp.message);
-        this.usersE.emit(resp.user);
+        this.trigger.emit(resp.user);
       }
     });
 

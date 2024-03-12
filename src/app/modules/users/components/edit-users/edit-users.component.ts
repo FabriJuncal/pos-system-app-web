@@ -15,7 +15,7 @@ import { HttpRequestStateService } from '../../../../_metronic/shared/services/h
 export class EditUsersComponent implements OnInit {
 
   @Input() user_selected: any = null;
-  @Output() usersE: EventEmitter<any> = new EventEmitter();
+  @Output() trigger: EventEmitter<any> = new EventEmitter();
 
 
   errorMessage: string;
@@ -105,7 +105,7 @@ export class EditUsersComponent implements OnInit {
       if(resp.status){
         this.toastr.success(resp.message);
         this.modal.close();
-        this.usersE.emit(resp.user);
+        this.trigger.emit(resp.user);
       }
     });
 
