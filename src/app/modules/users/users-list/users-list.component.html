@@ -72,55 +72,12 @@
 
     <!-- end::Header -->
     <!-- begin::Body -->
-    <div class="card-body py-3">
-      <!-- begin::Table container -->
-      <div class="table-responsive">
-        <!-- begin::Table -->
-        <table class="table align-middle gs-0 gy-4">
-          <!-- begin::Table head -->
-          <thead>
-            <tr class="fw-bolder text-muted bg-light">
-              <th class="ps-4 min-w-100px rounded-start">Nombres</th>
-              <th class="ps-4 min-w-100px rounded-start">Apellidos</th>
-              <th class="ps-4 min-w-100px rounded-start">Emails</th>
-              <th class="ps-4 min-w-100px rounded-start">Rol</th>
-              <th class="min-w-100px">Status</th>
-              <th class="text-center rounded-center"></th>
-            </tr>
-          </thead>
-          <!-- end::Table head -->
-          <!-- begin::Table body -->
-          <tbody>
-            <tr *ngFor="let user of users">
-              <td class="ps-4 min-w-100px rounded-start">{{ user.name }}</td>
-              <td class="ps-4 min-w-100px rounded-start">{{ user.surname }}</td>
-              <td class="ps-4 min-w-100px rounded-start">{{ user.email }}</td>
-              <td class="ps-4 min-w-100px rounded-start">
-                <span *ngIf="user.state === 1 || user.state === '1'" class="badge badge-light-success fs-7 fw-bold">ACTIVO</span>
-                <span *ngIf="user.state === 2 || user.state === '2'" class="badge badge-light-danger fs-7 fw-bold">INACTIVO</span>
-              </td>
-              <td class="ps-4 rounded-start">
-                <a
-                  (click)="editUser(user)"
-                  appTooltip data-bs-placement="top" data-bs-title="Editar Usuario"
-                  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                  <app-keenicon name="pencil" class="fs-3 text-info"></app-keenicon>
-                </a>
-                <a
-                  (click)="deleteUser(user)"
-                  appTooltip data-bs-placement="top" data-bs-title="Eliminar Usuario"
-                  class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                  <app-keenicon name="trash" class="fs-3 text-danger"></app-keenicon>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-          <!-- end::Table body -->
-        </table>
-        <!-- end::Table -->
-      </div>
-      <!-- end::Table container -->
-    </div>
+    <app-dynamic-table
+    [data]="dataTable$ | async"
+    [columns]="colmunsTable$ | async"
+    (modify)="modifyRecords($event)"
+    (delete)="deleteRecords($event)">
+  </app-dynamic-table>
     <!-- begin::Body -->
   </div>
 

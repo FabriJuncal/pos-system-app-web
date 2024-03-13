@@ -15,6 +15,7 @@ import { ColoredCircleComponent } from './colored-circle/colored-circle.componen
 import { SharedModule } from '../shared.module';
 import { DynamicSearchFormComponent } from './dynamic-search-form/dynamic-search-form.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
 
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
@@ -34,7 +35,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TagComponent,
     InfoMessageComponent,
     ColoredCircleComponent,
-    DynamicSearchFormComponent
+    DynamicSearchFormComponent,
+    DynamicTableComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TagComponent,
     InfoMessageComponent,
     ColoredCircleComponent,
-    DynamicSearchFormComponent
+    DynamicSearchFormComponent,
+    DynamicTableComponent
   ],
   providers: [
     {
